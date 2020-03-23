@@ -9,19 +9,21 @@
 #ifndef FIFO2_H_
 #define FIFO2_H_
 
+#include <stdint.h>
+
 
 typedef struct
 {
 	int OldestInd;
-	float* Sound;
-	float Sum;
+	uint32_t* Wave;
+	uint32_t Energy;
 	int len;
 }XFifo2;
 
 void FIFO2_Init(XFifo2* Fifo2, int len);
-float FIFO2_Insert(XFifo2* Fifo2, float inp);
+uint32_t FIFO2_Insert(XFifo2* Fifo2, uint32_t inp);
 void FIFO2_Reset(XFifo2* Fifo2);
-float FIFO2_GetNext(XFifo2* Fifo2);
+//uint32_t FIFO2_GetNext(XFifo2* Fifo2);
 
 
 

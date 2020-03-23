@@ -65,15 +65,17 @@ float Fifo2LenAverage;
 uint32_t delay;
 uint32_t FilterState = 6;
 int32_t FirstDetVal,SecondDetVal;
+uint32_t MaxEnergy;
 uint32_t MaxAllowedFirstVal = UINT32_MAX;
 
 #define MAX_CALIBRATION 6//11.0
 #define MAX_SIGNAL		9
-#define FIFO2_LEN 3
+#define FIFO2_LEN 1024
 
 uint16_t outp[2] = {0xff11,0xff90};
 XFifo Fifo;
-XFifo2 Fifo2p1;
+
+XFifo2 WaveArray;
 XFifo2 Fifo2p2;
 XFifo2 fifoDebug;
 
@@ -153,8 +155,8 @@ int main (void)
 	
 	// Init FIFO's
 	FIFO_Init(&Fifo);
-	FIFO2_Init(&Fifo2p1,FIFO2_LEN);
-	Fifo2LenAverage = 1.0f/((float)Fifo2p1.len);
+	FIFO2_Init(&WaveArray,FIFO2_LEN);
+	//Fifo2LenAverage = 1.0f/((float)Fifo2p1.len);
 	//FIFO2_Init(&Fifo2p2,5435);
 	FIFO2_Init(&fifoDebug,3000);
 		
@@ -209,7 +211,8 @@ int main (void)
 				case REGULAR_Detector:				
 				Detector_Calib2Regular();
 				break;
-				case CALIBRATE_Detector:				
+				case CALIBRATE_Detector:
+				FilterState = 6;				
 				break;
 				default:
 				Detector_Calib2Regular();
@@ -280,7 +283,7 @@ int main (void)
 				
 
 			FIFO_Init(&Fifo);
-			FIFO2_Reset(&Fifo2p1);
+			FIFO2_Reset(&WaveArray);
 			FilterState = 6;
 			delay = 0;
 			//FIFO2_Reset(&Fifo2p2);
@@ -314,11 +317,13 @@ ISR(ADC_Handler)
 		//pio_set_pin_high(LED2_GPIO); //for real time debug	
 		uint32_t OutDataToDAC0;
 		uint32_t OutDataToDAC1;
+		uint32_t Energy;
 		pio_set_pin_high(PIO_PA7_IDX);
 		Data = ADC->ADC_CDR[0]-MAX_ADC/2;
 		
+		Energy = FIFO2_Insert(&WaveArray, Data);
 		FIFO_Insert(&Fifo,Data);
-		OutData= FIFO_Filter(&Fifo);
+		OutData = FIFO_Filter(&Fifo);
 		OutData = abs(OutData);
 		//SoundSum = FIFO2_Insert(&Fifo2p1, OutData);		
 		//FIFO2_Insert(&fifoDebug,SoundSum);
@@ -327,6 +332,7 @@ ISR(ADC_Handler)
 			case 0:
 				SecondDetVal = 0;
 				FirstDetVal = 0;
+				MaxEnergy = 0;
 				if(OutData>MaxAllowedFirstVal)
 				{
 					FilterState = 5;
@@ -337,6 +343,7 @@ ISR(ADC_Handler)
 					//Det_flag = 1;
 					//adc_disable_interrupt(ADC,ADC_IER_EOC0);;
 					FirstDetVal = OutData;
+					MaxEnergy = Energy;
 					FilterState = 1;
 					delay = 0;					
 				}	
@@ -360,7 +367,9 @@ ISR(ADC_Handler)
 						FilterState = 2;
 						delay = 0;
 					}
-				}				
+				}
+				if(Energy > MaxEnergy)
+					MaxEnergy = Energy;
 			break;
 				
 			case 2:
@@ -445,13 +454,15 @@ ISR(ADC_Handler)
 		//pio_set_pin_low(LED2_GPIO);// for real time debug
 		if(!pio_get_pin_value(PIO_PA15_IDX))
 		{
-			OutDataToDAC0  = (FirstDetVal>>9)&0xfff;
-			OutDataToDAC1  = ((SecondDetVal>>9)&0xfff)|(1<<12);			
+			OutDataToDAC0  = (FirstDetVal>>9)&0xfff;			
+			//OutDataToDAC1  = ((SecondDetVal>>9)&0xfff)|(1<<12);			
+			OutDataToDAC1 = ((MaxEnergy >> 18)&0xfff)|(1<<12);
 		}
 		else
 		{
 			OutDataToDAC0 = MAX_SIGNAL<<(17-9);
-			OutDataToDAC1  = (MAX_SIGNAL<<(17-9))|(1<<12);
+			//OutDataToDAC1  = ((MAX_SIGNAL)<<(17-9))|(1<<12);
+			OutDataToDAC1  = (1<<(28-18))|(1<<12);
 		}
 		DAC3X8E_write(OutDataToDAC0);
 		DAC3X8E_write(OutDataToDAC1);
