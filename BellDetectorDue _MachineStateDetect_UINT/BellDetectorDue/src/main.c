@@ -201,7 +201,8 @@ int main (void)
 	Insert application code here, after the board has been initialized. */
 	while(1)
 	{	
-		Calibration = ADC->ADC_CDR[1];		
+		//Calibration = ADC->ADC_CDR[1];		
+		Calibration = ADCC_GlobalRawData[1];
 		DetectorState = GetDetectState();
 		if((DetectorState != UNKNOWN_Detector) &&(DetectorState != PrevDetectorState)) // State changed
 		{
@@ -240,8 +241,6 @@ int main (void)
 		//sprintf(out_str,"%lu\n", inputpin);	
 		//Echo the received byte
 			
-		//sprintf(out_str,"%f\n", Maximum);	
-		//PrintLn(out_str);
 		// We need to define a threshold and if OutData is greater than this threshold we send an RF signal to indicate the user that the door bell was rang by visitor
 		// According to my experience 50.0 is a fair threshold to define 
 		
@@ -298,7 +297,7 @@ int main (void)
 	
 		#if DEBUG_UART
 		Timer_Sleep(10);
-		sprintf(out_str,"%lu\n", FilterState);
+		sprintf(out_str,"%lu\r\n", ADCC_GlobalRawData[2]);//ADC->ADC_CDR[2]);
 		PrintLn(out_str);		
 		#endif
 		Timer_Sleep(100);
@@ -311,7 +310,7 @@ __no_inline
 RAMFUNC
 ISR(ADC_Handler)
 {	
-	if(ADC->ADC_ISR & ADC_ISR_EOC0)
+	if(ADC->ADC_ISR & ADC_IER_ENDRX)
 	{		
 		//float Inp;
 		//pio_set_pin_high(LED2_GPIO); //for real time debug	
@@ -319,7 +318,12 @@ ISR(ADC_Handler)
 		uint32_t OutDataToDAC1;
 		uint32_t Energy;
 		pio_set_pin_high(PIO_PA7_IDX);
-		Data = ADC->ADC_CDR[0]-MAX_ADC/2;
+		
+		ADC->ADC_RNPR =  (uint32_t)ADCC_GlobalRawData;
+		ADC->ADC_RNCR = ADC_NUM_CHANNELS;
+		Data = ADCC_GlobalRawData[0] - MAX_ADC/2;;
+		//Data = ADC->ADC_CDR[0]-MAX_ADC/2;
+		
 		
 		Energy = FIFO2_Insert(&WaveArray, Data);
 		FIFO_Insert(&Fifo,Data);

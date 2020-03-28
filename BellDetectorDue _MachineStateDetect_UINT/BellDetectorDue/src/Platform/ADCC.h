@@ -11,6 +11,9 @@
 
 #include <asf.h>
 #define MAX_ADC 4096
+#define ADC_NUM_CHANNELS 3
+
+extern uint16_t ADCC_GlobalRawData[ADC_NUM_CHANNELS];
 
 void ADCC_Init(void);
 

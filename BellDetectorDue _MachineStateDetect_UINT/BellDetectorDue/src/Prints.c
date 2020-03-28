@@ -14,10 +14,11 @@ void PrintLn(const char *str)
 	int i=0;
 	while(str[i]!='\n')
 	{
-		uart_write(UART, str[i]);
-		i++;
 		while (!(UART->UART_SR & UART_SR_TXRDY));
+		uart_write(UART, str[i]);
+		i++;		
 	}
+	while (!(UART->UART_SR & UART_SR_TXRDY));
 	uart_write(UART, str[i]);
 	#endif
 }
