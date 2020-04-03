@@ -141,16 +141,16 @@ int main (void)
 	sysclk_enable_peripheral_clock(ID_UART);
 	#endif
 	gpio_configure_group(PIOB, PIO_PB26, PIO_INPUT|PIO_DEBOUNCE); // arduino due pin # 22
-	gpio_configure_group(PIOD, PIO_PD1, PIO_OUTPUT_0); // arduino due pin # 26 OUTPUT red LED error
-	gpio_configure_group(PIOB, PIO_PB21, PIO_OUTPUT_0); // arduino Blue LED
+	gpio_configure_group(PIOD, PIO_PD1, PIO_OUTPUT_1); // arduino due pin # 26 OUTPUT red LED error
+	gpio_configure_group(PIOB, PIO_PB21, PIO_OUTPUT_1); // arduino Blue LED
 	gpio_configure_group(PIOA, PIO_PA7, PIO_OUTPUT_0); // arduino RT meas
 	gpio_configure_group(PIOA, PIO_PA15, PIO_INPUT|PIO_DEBOUNCE); // arduino due pin # 24 BUTTON
 	// might conister to use pull down instead of debouncer
 	board_init();
-	pio_set_pin_low(LED2_GPIO);	
-	pio_set_pin_low(PIO_PD1_IDX);
-	pio_set_pin_low(PIO_PB21_IDX);
-	pio_set_pin_low(PIO_PA7_IDX);
+	pio_set_pin_low(LED2_GPIO);	 // Green LED
+	pio_set_pin_high(PIO_PD1_IDX); // Red LED
+	pio_set_pin_high(PIO_PB21_IDX); // Blue LED
+	pio_set_pin_low(PIO_PA7_IDX); 
 	
 	
 	// Init FIFO's
@@ -176,12 +176,12 @@ int main (void)
 		__NOP;
 	RF_SendBell(RF24_TEST);
 	pio_set_pin_high(LED2_GPIO);
-	pio_set_pin_high(PIO_PD1_IDX);
-	pio_set_pin_high(PIO_PB21_IDX);
-	Timer_Sleep(1000);
-	pio_set_pin_low(LED2_GPIO);
 	pio_set_pin_low(PIO_PD1_IDX);
 	pio_set_pin_low(PIO_PB21_IDX);
+	Timer_Sleep(1000);
+	pio_set_pin_low(LED2_GPIO);
+	pio_set_pin_high(PIO_PD1_IDX);
+	pio_set_pin_high(PIO_PB21_IDX);
 	
 	//Timer_Sleep(10000);
 	DetectorState = GetDetectState();
@@ -227,16 +227,16 @@ int main (void)
 			MaxAllowedFirstVal = Threshold + (4<<17);//(29<<17)/10;
 			break;
 			case CALIBRATE_Detector:
-			pio_set_pin_low(PIO_PD1_IDX);
+			pio_set_pin_high(PIO_PD1_IDX);
 			MaxAllowedFirstVal = UINT32_MAX;
 			break;
 			default:
 			break;
 		}
 		if(FilterState == 5)
-			pio_set_pin_high(PIO_PD1_IDX);
-		else
 			pio_set_pin_low(PIO_PD1_IDX);
+		else
+			pio_set_pin_high(PIO_PD1_IDX);
 				
 		//sprintf(out_str,"%lu\n", inputpin);	
 		//Echo the received byte
@@ -270,10 +270,10 @@ int main (void)
 				case CALIBRATE_Detector:
 				pio_set_pin_high(LED2_GPIO);
 				if((FirstDetVal>(Threshold+(1<<17))) && (FirstDetVal<(Threshold+(3<<17))))
-					pio_set_pin_high(PIO_PB21_IDX);
+					pio_set_pin_low(PIO_PB21_IDX);
 				Timer_Sleep(3000);				
 				pio_set_pin_low(LED2_GPIO);
-				pio_set_pin_low(PIO_PB21_IDX);
+				pio_set_pin_high(PIO_PB21_IDX);
 				//PrintLn("CALIBRATE_Detector\n");
 				break;
 				default:
@@ -287,7 +287,7 @@ int main (void)
 			delay = 0;
 			//FIFO2_Reset(&Fifo2p2);
 			Timer_Sleep(20);
-			adc_enable_interrupt(ADC,ADC_IER_EOC0);
+			ADCC_Init();
 		}
 		if(DetectorState == CALIBRATE_Detector){
 			Threshold = Calibration*(1<<5)*MAX_CALIBRATION;
@@ -316,7 +316,7 @@ ISR(ADC_Handler)
 		//pio_set_pin_high(LED2_GPIO); //for real time debug	
 		uint32_t OutDataToDAC0;
 		uint32_t OutDataToDAC1;
-		uint32_t Energy;
+	//	uint32_t Energy;
 		pio_set_pin_high(PIO_PA7_IDX);
 		
 		ADC->ADC_RNPR =  (uint32_t)ADCC_GlobalRawData;
@@ -324,8 +324,7 @@ ISR(ADC_Handler)
 		Data = ADCC_GlobalRawData[0] - MAX_ADC/2;;
 		//Data = ADC->ADC_CDR[0]-MAX_ADC/2;
 		
-		
-		Energy = FIFO2_Insert(&WaveArray, Data);
+		//Energy = FIFO2_Insert(&WaveArray, Data);
 		FIFO_Insert(&Fifo,Data);
 		OutData = FIFO_Filter(&Fifo);
 		OutData = abs(OutData);
@@ -336,7 +335,7 @@ ISR(ADC_Handler)
 			case 0:
 				SecondDetVal = 0;
 				FirstDetVal = 0;
-				MaxEnergy = 0;
+				//MaxEnergy = 0;
 				if(OutData>MaxAllowedFirstVal)
 				{
 					FilterState = 5;
@@ -347,7 +346,7 @@ ISR(ADC_Handler)
 					//Det_flag = 1;
 					//adc_disable_interrupt(ADC,ADC_IER_EOC0);;
 					FirstDetVal = OutData;
-					MaxEnergy = Energy;
+					//MaxEnergy = Energy;
 					FilterState = 1;
 					delay = 0;					
 				}	
@@ -372,8 +371,8 @@ ISR(ADC_Handler)
 						delay = 0;
 					}
 				}
-				if(Energy > MaxEnergy)
-					MaxEnergy = Energy;
+				/*if(Energy > MaxEnergy)
+					MaxEnergy = Energy;*/
 			break;
 				
 			case 2:
@@ -425,7 +424,8 @@ ISR(ADC_Handler)
 					Det_flag = 1;
 					FilterState = 6;
 					delay = 0;
-					adc_disable_interrupt(ADC,ADC_IER_EOC0);
+					adc_disable_interrupt(ADC,ADC_IER_ENDRX);
+					adc_reset(ADC);
 				}				
 			break;
 			
@@ -459,14 +459,14 @@ ISR(ADC_Handler)
 		if(!pio_get_pin_value(PIO_PA15_IDX))
 		{
 			OutDataToDAC0  = (FirstDetVal>>9)&0xfff;			
-			//OutDataToDAC1  = ((SecondDetVal>>9)&0xfff)|(1<<12);			
-			OutDataToDAC1 = ((MaxEnergy >> 18)&0xfff)|(1<<12);
+			OutDataToDAC1  = ((SecondDetVal>>9)&0xfff)|(1<<12);			
+			//OutDataToDAC1 = ((MaxEnergy >> 18)&0xfff)|(1<<12);
 		}
 		else
 		{
 			OutDataToDAC0 = MAX_SIGNAL<<(17-9);
-			//OutDataToDAC1  = ((MAX_SIGNAL)<<(17-9))|(1<<12);
-			OutDataToDAC1  = (1<<(28-18))|(1<<12);
+			OutDataToDAC1  = ((MAX_SIGNAL)<<(17-9))|(1<<12);
+			//OutDataToDAC1  = (1<<(28-18))|(1<<12);
 		}
 		DAC3X8E_write(OutDataToDAC0);
 		DAC3X8E_write(OutDataToDAC1);
