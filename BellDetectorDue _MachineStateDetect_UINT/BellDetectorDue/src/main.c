@@ -209,8 +209,11 @@ int main (void)
 			PrintLn("State change\n");
 			switch(DetectorState)
 			{
-				case REGULAR_Detector:				
+				case REGULAR_Detector:		
+				adc_disable_interrupt(ADC,ADC_IER_ENDRX);
+				adc_reset(ADC);		
 				Detector_Calib2Regular();
+				ADCC_Init();
 				break;
 				case CALIBRATE_Detector:
 				FilterState = 6;				
