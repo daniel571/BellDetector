@@ -10,7 +10,7 @@
 #define FIFO2_H_
 
 #include <stdint.h>
-
+#if 0
 
 typedef struct
 {
@@ -25,6 +25,7 @@ uint32_t FIFO2_Insert(XFifo2* Fifo2, uint32_t inp);
 void FIFO2_Reset(XFifo2* Fifo2);
 //uint32_t FIFO2_GetNext(XFifo2* Fifo2);
 
-
+#endif
 
 #endif /* FIFO2_H_ */
+

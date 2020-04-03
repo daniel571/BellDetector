@@ -4,6 +4,7 @@
  * Created: 22/08/2019 20:35:38
  *  Author: Daniel
  */ 
+#if 0
 #include "FIFO2.h"
 #include <malloc.h>
 
@@ -76,3 +77,4 @@ Fifo2->Wave[i] = 0.0;
 Fifo2->Energy = 0;
 
 }*/
+#endif

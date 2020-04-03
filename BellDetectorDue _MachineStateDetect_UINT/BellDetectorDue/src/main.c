@@ -75,9 +75,9 @@ uint32_t MaxAllowedFirstVal = UINT32_MAX;
 uint16_t outp[2] = {0xff11,0xff90};
 XFifo Fifo;
 
-XFifo2 WaveArray;
-XFifo2 Fifo2p2;
-XFifo2 fifoDebug;
+//XFifo2 WaveArray;
+//XFifo2 Fifo2p2;
+//XFifo2 fifoDebug;
 
 uint GetDetectState(void);
 void Detector_Calib2Regular(void);
@@ -155,10 +155,10 @@ int main (void)
 	
 	// Init FIFO's
 	FIFO_Init(&Fifo);
-	FIFO2_Init(&WaveArray,FIFO2_LEN);
+	//FIFO2_Init(&WaveArray,FIFO2_LEN);
 	//Fifo2LenAverage = 1.0f/((float)Fifo2p1.len);
 	//FIFO2_Init(&Fifo2p2,5435);
-	FIFO2_Init(&fifoDebug,3000);
+	//FIFO2_Init(&fifoDebug,3000);
 		
 	
 	Timer_init();
@@ -285,7 +285,7 @@ int main (void)
 				
 
 			FIFO_Init(&Fifo);
-			FIFO2_Reset(&WaveArray);
+			//FIFO2_Reset(&WaveArray);
 			FilterState = 6;
 			delay = 0;
 			//FIFO2_Reset(&Fifo2p2);
