@@ -7,39 +7,39 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
   1 .ARM.exidx    00000008  000865a4  000865a4  000165a4  2**2
                   CONTENTS, ALLOC, LOAD, READONLY, DATA
-  2 .relocate     00000e98  20070000  000865ac  00020000  2**3
+  2 .relocate     00000ea0  20070000  000865ac  00020000  2**3
                   CONTENTS, ALLOC, LOAD, CODE
-  3 .bss          00000260  20070e98  00087444  00020e98  2**2
+  3 .bss          00000260  20070ea0  0008744c  00020ea0  2**2
                   ALLOC
-  4 .stack        00002000  200710f8  000876a4  00020e98  2**0
+  4 .stack        00002000  20071100  000876ac  00020ea0  2**0
                   ALLOC
-  5 .ARM.attributes 00000029  00000000  00000000  00020e98  2**0
+  5 .ARM.attributes 00000029  00000000  00000000  00020ea0  2**0
                   CONTENTS, READONLY
-  6 .comment      00000059  00000000  00000000  00020ec1  2**0
+  6 .comment      00000059  00000000  00000000  00020ec9  2**0
                   CONTENTS, READONLY
-  7 .debug_info   00019c00  00000000  00000000  00020f1a  2**0
+  7 .debug_info   00019c00  00000000  00000000  00020f22  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_abbrev 00003e4c  00000000  00000000  0003ab1a  2**0
+  8 .debug_abbrev 00003e4c  00000000  00000000  0003ab22  2**0
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_loc    00004eed  00000000  00000000  0003e966  2**0
+  9 .debug_loc    00004eed  00000000  00000000  0003e96e  2**0
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_aranges 00000a58  00000000  00000000  00043853  2**0
+ 10 .debug_aranges 00000a58  00000000  00000000  0004385b  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_ranges 000009a8  00000000  00000000  000442ab  2**0
+ 11 .debug_ranges 000009a8  00000000  00000000  000442b3  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_macro  0001b14f  00000000  00000000  00044c53  2**0
+ 12 .debug_macro  0001b14f  00000000  00000000  00044c5b  2**0
                   CONTENTS, READONLY, DEBUGGING
- 13 .debug_line   00012543  00000000  00000000  0005fda2  2**0
+ 13 .debug_line   0001253f  00000000  00000000  0005fdaa  2**0
                   CONTENTS, READONLY, DEBUGGING
- 14 .debug_str    00066182  00000000  00000000  000722e5  2**0
+ 14 .debug_str    00066182  00000000  00000000  000722e9  2**0
                   CONTENTS, READONLY, DEBUGGING
- 15 .debug_frame  000021fc  00000000  00000000  000d8468  2**2
+ 15 .debug_frame  000021fc  00000000  00000000  000d846c  2**2
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
 
 00080000 <exception_table>:
-   80000:	f8 30 07 20 c5 14 08 00 c1 14 08 00 c1 14 08 00     .0. ............
+   80000:	00 31 07 20 c5 14 08 00 c1 14 08 00 c1 14 08 00     .1. ............
    80010:	c1 14 08 00 c1 14 08 00 c1 14 08 00 00 00 00 00     ................
 	...
    8002c:	c1 14 08 00 c1 14 08 00 00 00 00 00 c1 14 08 00     ................
@@ -68,7 +68,7 @@ Disassembly of section .text:
    80106:	2301      	movs	r3, #1
    80108:	7023      	strb	r3, [r4, #0]
    8010a:	bd10      	pop	{r4, pc}
-   8010c:	20070e98 	.word	0x20070e98
+   8010c:	20070ea0 	.word	0x20070ea0
    80110:	00000000 	.word	0x00000000
    80114:	000865ac 	.word	0x000865ac
 
@@ -99,7 +99,7 @@ Disassembly of section .text:
    8014a:	bf00      	nop
    8014c:	00000000 	.word	0x00000000
    80150:	000865ac 	.word	0x000865ac
-   80154:	20070e9c 	.word	0x20070e9c
+   80154:	20070ea4 	.word	0x20070ea4
    80158:	000865ac 	.word	0x000865ac
    8015c:	00000000 	.word	0x00000000
 
@@ -399,7 +399,7 @@ static inline void cpu_irq_restore(irqflags_t flags)
 }
    80280:	b002      	add	sp, #8
    80282:	bd10      	pop	{r4, pc}
-   80284:	200704d8 	.word	0x200704d8
+   80284:	200704e0 	.word	0x200704e0
    80288:	2007007d 	.word	0x2007007d
 
 0008028c <FIFO_Init>:
@@ -953,7 +953,7 @@ uint32_t flash_write(uint32_t ul_address, const void *p_buffer,
    80550:	000801f5 	.word	0x000801f5
    80554:	00080215 	.word	0x00080215
    80558:	00080231 	.word	0x00080231
-   8055c:	20070eb4 	.word	0x20070eb4
+   8055c:	20070ebc 	.word	0x20070ebc
    80560:	000819e9 	.word	0x000819e9
 
 00080564 <WriteCalibToFlash>:
@@ -1067,7 +1067,7 @@ void writeByte_register(uint8_t reg, uint8_t value)
 }
    8060c:	e7f8      	b.n	80600 <writeByte_register+0x20>
    8060e:	bf00      	nop
-   80610:	20070fb4 	.word	0x20070fb4
+   80610:	20070fbc 	.word	0x20070fbc
    80614:	00080dad 	.word	0x00080dad
    80618:	000862cc 	.word	0x000862cc
    8061c:	000805dd 	.word	0x000805dd
@@ -1117,7 +1117,7 @@ void writeBuf_register(uint8_t reg, const uint16_t* Buf, int Len)
 }
    80660:	e7f9      	b.n	80656 <writeBuf_register+0x36>
    80662:	bf00      	nop
-   80664:	20070fb4 	.word	0x20070fb4
+   80664:	20070fbc 	.word	0x20070fbc
    80668:	00080dad 	.word	0x00080dad
    8066c:	000862c4 	.word	0x000862c4
    80670:	000805dd 	.word	0x000805dd
@@ -1167,7 +1167,7 @@ uint8_t readByte_register(uint8_t reg)
    806b4:	bd30      	pop	{r4, r5, pc}
    806b6:	bf00      	nop
    806b8:	00081ad5 	.word	0x00081ad5
-   806bc:	20070fb4 	.word	0x20070fb4
+   806bc:	20070fbc 	.word	0x20070fbc
    806c0:	00080e69 	.word	0x00080e69
    806c4:	000862ac 	.word	0x000862ac
    806c8:	00081b71 	.word	0x00081b71
@@ -1229,7 +1229,7 @@ void readBuf_register(uint8_t reg, uint16_t* Resp)
    80724:	b010      	add	sp, #64	; 0x40
    80726:	bd70      	pop	{r4, r5, r6, pc}
    80728:	00081ad5 	.word	0x00081ad5
-   8072c:	20070fb4 	.word	0x20070fb4
+   8072c:	20070fbc 	.word	0x20070fbc
    80730:	00080e69 	.word	0x00080e69
    80734:	0008628c 	.word	0x0008628c
    80738:	00081b71 	.word	0x00081b71
@@ -1497,7 +1497,7 @@ void flush_rx(void)
    80860:	4798      	blx	r3
 }
    80862:	e7f8      	b.n	80856 <flush_rx+0x16>
-   80864:	20070fb4 	.word	0x20070fb4
+   80864:	20070fbc 	.word	0x20070fbc
    80868:	00080dad 	.word	0x00080dad
    8086c:	000862cc 	.word	0x000862cc
    80870:	000805dd 	.word	0x000805dd
@@ -1531,7 +1531,7 @@ void flush_tx(void)
    80894:	4798      	blx	r3
 }
    80896:	e7f8      	b.n	8088a <flush_tx+0x16>
-   80898:	20070fb4 	.word	0x20070fb4
+   80898:	20070fbc 	.word	0x20070fbc
    8089c:	00080dad 	.word	0x00080dad
    808a0:	000862cc 	.word	0x000862cc
    808a4:	000805dd 	.word	0x000805dd
@@ -1724,7 +1724,7 @@ void RF_SendBell(uint16_t CmdID)
    809b2:	bf00      	nop
    809b4:	000805e1 	.word	0x000805e1
    809b8:	00080fa5 	.word	0x00080fa5
-   809bc:	20070fb4 	.word	0x20070fb4
+   809bc:	20070fbc 	.word	0x20070fbc
    809c0:	00080dad 	.word	0x00080dad
    809c4:	00086274 	.word	0x00086274
    809c8:	000805dd 	.word	0x000805dd
@@ -2242,7 +2242,7 @@ __STATIC_INLINE void NVIC_EnableIRQ(IRQn_Type IRQn)
    80c3c:	000801e5 	.word	0x000801e5
    80c40:	000801f1 	.word	0x000801f1
    80c44:	00080195 	.word	0x00080195
-   80c48:	20071068 	.word	0x20071068
+   80c48:	20071070 	.word	0x20071070
    80c4c:	000801db 	.word	0x000801db
    80c50:	000801ed 	.word	0x000801ed
    80c54:	e000e100 	.word	0xe000e100
@@ -3426,7 +3426,7 @@ void pio_handler_process(Pio *p_pio, uint32_t ul_id)
    81358:	e8bd 81f0 	ldmia.w	sp!, {r4, r5, r6, r7, r8, pc}
    8135c:	00081153 	.word	0x00081153
    81360:	00081157 	.word	0x00081157
-   81364:	20070fb8 	.word	0x20070fb8
+   81364:	20070fc0 	.word	0x20070fc0
 
 00081368 <PIOA_Handler>:
 /**
@@ -3788,9 +3788,9 @@ void Reset_Handler(void)
    81536:	e7fe      	b.n	81536 <Reset_Handler+0x72>
    81538:	20070000 	.word	0x20070000
    8153c:	000865ac 	.word	0x000865ac
-   81540:	20070e98 	.word	0x20070e98
-   81544:	200710f8 	.word	0x200710f8
-   81548:	20070e98 	.word	0x20070e98
+   81540:	20070ea0 	.word	0x20070ea0
+   81544:	20071100 	.word	0x20071100
+   81548:	20070ea0 	.word	0x20070ea0
    8154c:	00080000 	.word	0x00080000
    81550:	e000ed00 	.word	0xe000ed00
    81554:	00081999 	.word	0x00081999
@@ -3949,7 +3949,7 @@ void SystemCoreClockUpdate(void)
    81652:	bf00      	nop
    81654:	400e0600 	.word	0x400e0600
    81658:	400e1a10 	.word	0x400e1a10
-   8165c:	200704dc 	.word	0x200704dc
+   8165c:	200704e4 	.word	0x200704e4
    81660:	00b71b00 	.word	0x00b71b00
    81664:	003d0900 	.word	0x003d0900
    81668:	007a1200 	.word	0x007a1200
@@ -3998,9 +3998,9 @@ void SystemCoreClockUpdate(void)
 }
    8169c:	4770      	bx	lr
    8169e:	bf00      	nop
-   816a0:	20071028 	.word	0x20071028
+   816a0:	20071030 	.word	0x20071030
    816a4:	20087ffc 	.word	0x20087ffc
-   816a8:	200730f8 	.word	0x200730f8
+   816a8:	20073100 	.word	0x20073100
 
 000816ac <GetDetectState>:
 
@@ -4069,8 +4069,8 @@ void Detector_Calib2Regular()
 }
    816e6:	b005      	add	sp, #20
    816e8:	f85d fb04 	ldr.w	pc, [sp], #4
-   816ec:	200704e0 	.word	0x200704e0
-   816f0:	200704e8 	.word	0x200704e8
+   816ec:	200704e8 	.word	0x200704e8
+   816f0:	200704f0 	.word	0x200704f0
    816f4:	00080565 	.word	0x00080565
    816f8:	000862d4 	.word	0x000862d4
    816fc:	000805dd 	.word	0x000805dd
@@ -4469,7 +4469,7 @@ int main (void)
    8191c:	0008103d 	.word	0x0008103d
    81920:	00081191 	.word	0x00081191
    81924:	00081177 	.word	0x00081177
-   81928:	20071094 	.word	0x20071094
+   81928:	2007109c 	.word	0x2007109c
    8192c:	0008028d 	.word	0x0008028d
    81930:	00080f2d 	.word	0x00080f2d
    81934:	00080ccd 	.word	0x00080ccd
@@ -4478,25 +4478,25 @@ int main (void)
    81940:	00080971 	.word	0x00080971
    81944:	00080fa5 	.word	0x00080fa5
    81948:	000816ad 	.word	0x000816ad
-   8194c:	20071080 	.word	0x20071080
-   81950:	20071070 	.word	0x20071070
+   8194c:	20071088 	.word	0x20071088
+   81950:	20071078 	.word	0x20071078
    81954:	00080b95 	.word	0x00080b95
    81958:	000802b9 	.word	0x000802b9
-   8195c:	200704e0 	.word	0x200704e0
+   8195c:	200704e8 	.word	0x200704e8
    81960:	00080381 	.word	0x00080381
-   81964:	200704e8 	.word	0x200704e8
+   81964:	200704f0 	.word	0x200704f0
    81968:	400c0000 	.word	0x400c0000
    8196c:	000801f1 	.word	0x000801f1
    81970:	000801d5 	.word	0x000801d5
    81974:	000816c9 	.word	0x000816c9
-   81978:	200704e4 	.word	0x200704e4
-   8197c:	2007102c 	.word	0x2007102c
-   81980:	20071088 	.word	0x20071088
-   81984:	20071068 	.word	0x20071068
-   81988:	20071074 	.word	0x20071074
+   81978:	200704ec 	.word	0x200704ec
+   8197c:	20071034 	.word	0x20071034
+   81980:	20071090 	.word	0x20071090
+   81984:	20071070 	.word	0x20071070
+   81988:	2007107c 	.word	0x2007107c
    8198c:	000862e4 	.word	0x000862e4
    81990:	000805dd 	.word	0x000805dd
-   81994:	20071084 	.word	0x20071084
+   81994:	2007108c 	.word	0x2007108c
 
 00081998 <__libc_init_array>:
    81998:	b570      	push	{r4, r5, r6, lr}
@@ -4731,7 +4731,7 @@ int main (void)
    81bb0:	e8bd 40f0 	ldmia.w	sp!, {r4, r5, r6, r7, lr}
    81bb4:	b003      	add	sp, #12
    81bb6:	4770      	bx	lr
-   81bb8:	200704ec 	.word	0x200704ec
+   81bb8:	200704f4 	.word	0x200704f4
 
 00081bbc <strlen>:
    81bbc:	f020 0103 	bic.w	r1, r0, #3
@@ -8457,9 +8457,9 @@ int main (void)
    84166:	6008      	str	r0, [r1, #0]
    84168:	e7d5      	b.n	84116 <_malloc_trim_r+0x3e>
    8416a:	bf00      	nop
-   8416c:	20070a88 	.word	0x20070a88
-   84170:	20071034 	.word	0x20071034
-   84174:	20070e90 	.word	0x20070e90
+   8416c:	20070a90 	.word	0x20070a90
+   84170:	2007103c 	.word	0x2007103c
+   84174:	20070e98 	.word	0x20070e98
 
 00084178 <_free_r>:
    84178:	2900      	cmp	r1, #0
@@ -8646,10 +8646,10 @@ int main (void)
    8432e:	6061      	str	r1, [r4, #4]
    84330:	6013      	str	r3, [r2, #0]
    84332:	e763      	b.n	841fc <_free_r+0x84>
-   84334:	20070a88 	.word	0x20070a88
-   84338:	20070a90 	.word	0x20070a90
-   8433c:	20070e94 	.word	0x20070e94
-   84340:	20071064 	.word	0x20071064
+   84334:	20070a90 	.word	0x20070a90
+   84338:	20070a98 	.word	0x20070a98
+   8433c:	20070e9c 	.word	0x20070e9c
+   84340:	2007106c 	.word	0x2007106c
 
 00084344 <_localeconv_r>:
    84344:	4a04      	ldr	r2, [pc, #16]	; (84358 <_localeconv_r+0x14>)
@@ -8662,8 +8662,8 @@ int main (void)
    84352:	30f0      	adds	r0, #240	; 0xf0
    84354:	4770      	bx	lr
    84356:	bf00      	nop
-   84358:	200704ec 	.word	0x200704ec
-   8435c:	2007091c 	.word	0x2007091c
+   84358:	200704f4 	.word	0x200704f4
+   8435c:	20070924 	.word	0x20070924
 
 00084360 <__retarget_lock_acquire_recursive>:
    84360:	4770      	bx	lr
@@ -8968,13 +8968,13 @@ int main (void)
    84688:	f103 0e6e 	add.w	lr, r3, #110	; 0x6e
    8468c:	00c1      	lsls	r1, r0, #3
    8468e:	e68d      	b.n	843ac <_malloc_r+0x44>
-   84690:	20070a88 	.word	0x20070a88
-   84694:	20071064 	.word	0x20071064
-   84698:	20071034 	.word	0x20071034
-   8469c:	2007105c 	.word	0x2007105c
-   846a0:	20071060 	.word	0x20071060
-   846a4:	20070a90 	.word	0x20070a90
-   846a8:	20070e90 	.word	0x20070e90
+   84690:	20070a90 	.word	0x20070a90
+   84694:	2007106c 	.word	0x2007106c
+   84698:	2007103c 	.word	0x2007103c
+   8469c:	20071064 	.word	0x20071064
+   846a0:	20071068 	.word	0x20071068
+   846a4:	20070a98 	.word	0x20070a98
+   846a8:	20070e98 	.word	0x20070e98
    846ac:	0a5a      	lsrs	r2, r3, #9
    846ae:	2a04      	cmp	r2, #4
    846b0:	d95b      	bls.n	8476a <_malloc_r+0x402>
@@ -9168,7 +9168,7 @@ int main (void)
    848a0:	f106 0308 	add.w	r3, r6, #8
    848a4:	e60e      	b.n	844c4 <_malloc_r+0x15c>
    848a6:	bf00      	nop
-   848a8:	20071034 	.word	0x20071034
+   848a8:	2007103c 	.word	0x2007103c
 
 000848ac <__ascii_mbtowc>:
    848ac:	b082      	sub	sp, #8
@@ -9336,13 +9336,13 @@ int main (void)
    84a2c:	4801      	ldr	r0, [pc, #4]	; (84a34 <__malloc_lock+0x8>)
    84a2e:	f7ff bc97 	b.w	84360 <__retarget_lock_acquire_recursive>
    84a32:	bf00      	nop
-   84a34:	200710e0 	.word	0x200710e0
+   84a34:	200710e8 	.word	0x200710e8
 
 00084a38 <__malloc_unlock>:
    84a38:	4801      	ldr	r0, [pc, #4]	; (84a40 <__malloc_unlock+0x8>)
    84a3a:	f7ff bc93 	b.w	84364 <__retarget_lock_release_recursive>
    84a3e:	bf00      	nop
-   84a40:	200710e0 	.word	0x200710e0
+   84a40:	200710e8 	.word	0x200710e8
 
 00084a44 <_Balloc>:
    84a44:	6cc3      	ldr	r3, [r0, #76]	; 0x4c
@@ -10284,7 +10284,7 @@ int main (void)
    85382:	f104 0110 	add.w	r1, r4, #16
    85386:	f10a 0218 	add.w	r2, sl, #24
    8538a:	e76e      	b.n	8526a <_realloc_r+0x22e>
-   8538c:	20070a88 	.word	0x20070a88
+   8538c:	20070a90 	.word	0x20070a90
    85390:	6922      	ldr	r2, [r4, #16]
    85392:	f104 0118 	add.w	r1, r4, #24
    85396:	f8ca 2018 	str.w	r2, [sl, #24]
@@ -10310,7 +10310,7 @@ int main (void)
    853c2:	d0fb      	beq.n	853bc <_sbrk_r+0x14>
    853c4:	602b      	str	r3, [r5, #0]
    853c6:	bd38      	pop	{r3, r4, r5, pc}
-   853c8:	200710f4 	.word	0x200710f4
+   853c8:	200710fc 	.word	0x200710fc
 
 000853cc <__ssprint_r>:
    853cc:	e92d 4ff0 	stmdb	sp!, {r4, r5, r6, r7, r8, r9, sl, fp, lr}
@@ -10493,7 +10493,7 @@ int main (void)
    8558e:	f04f 30ff 	mov.w	r0, #4294967295
    85592:	e8bd 83f8 	ldmia.w	sp!, {r3, r4, r5, r6, r7, r8, r9, pc}
    85596:	bf00      	nop
-   85598:	20070918 	.word	0x20070918
+   85598:	20070920 	.word	0x20070920
    8559c:	000862f4 	.word	0x000862f4
    855a0:	00000000 	.word	0x00000000
 
@@ -11629,7 +11629,7 @@ int main (void)
    862f0:	0000000a                                ....
 
 000862f4 <_global_impure_ptr>:
-   862f4:	200704f0 00464e49 00666e69 004e414e     ... INF.inf.NAN.
+   862f4:	200704f8 00464e49 00666e69 004e414e     ... INF.inf.NAN.
    86304:	006e616e 33323130 37363534 42413938     nan.0123456789AB
    86314:	46454443 00000000 33323130 37363534     CDEF....01234567
    86324:	62613938 66656463 00000000 6c756e28     89abcdef....(nul
@@ -11939,7 +11939,7 @@ uint32_t efc_perform_fcr(Efc *p_efc, uint32_t ul_fcr)
 2007012c:	01370809 	.word	0x01370809
 20070130:	200d3f01 	.word	0x200d3f01
 20070134:	0501bd00 	.word	0x0501bd00
-20070138:	200704dc 	.word	0x200704dc
+20070138:	200704e4 	.word	0x200704e4
 
 2007013c <system_init_flash>:
 __no_inline
@@ -12035,7 +12035,7 @@ ISR(ADC_Handler)
 {	
 200701c4:	b538      	push	{r3, r4, r5, lr}
 	if(ADC->ADC_ISR & ADC_IER_ENDRX)
-200701c6:	4b90      	ldr	r3, [pc, #576]	; (20070408 <ADC_Handler+0x244>)
+200701c6:	4b98      	ldr	r3, [pc, #608]	; (20070428 <ADC_Handler+0x264>)
 200701c8:	6b1b      	ldr	r3, [r3, #48]	; 0x30
 200701ca:	f013 6f00 	tst.w	r3, #134217728	; 0x8000000
 200701ce:	d100      	bne.n	200701d2 <ADC_Handler+0xe>
@@ -12047,12 +12047,12 @@ ISR(ADC_Handler)
 	//	uint32_t Energy;
 		pio_set_pin_high(PIO_PA7_IDX);
 200701d2:	2007      	movs	r0, #7
-200701d4:	4b8d      	ldr	r3, [pc, #564]	; (2007040c <ADC_Handler+0x248>)
+200701d4:	4b95      	ldr	r3, [pc, #596]	; (2007042c <ADC_Handler+0x268>)
 200701d6:	4798      	blx	r3
 		
 		ADC->ADC_RNPR =  (uint32_t)ADCC_GlobalRawData;
-200701d8:	4b8d      	ldr	r3, [pc, #564]	; (20070410 <ADC_Handler+0x24c>)
-200701da:	4a8b      	ldr	r2, [pc, #556]	; (20070408 <ADC_Handler+0x244>)
+200701d8:	4b95      	ldr	r3, [pc, #596]	; (20070430 <ADC_Handler+0x26c>)
+200701da:	4a93      	ldr	r2, [pc, #588]	; (20070428 <ADC_Handler+0x264>)
 200701dc:	f8c2 3110 	str.w	r3, [r2, #272]	; 0x110
 		ADC->ADC_RNCR = ADC_NUM_CHANNELS;
 200701e0:	2103      	movs	r1, #3
@@ -12060,7 +12060,7 @@ ISR(ADC_Handler)
 		Data = ADCC_GlobalRawData[0] - MAX_ADC/2;;
 200701e6:	881a      	ldrh	r2, [r3, #0]
 200701e8:	f5a2 6200 	sub.w	r2, r2, #2048	; 0x800
-200701ec:	4b89      	ldr	r3, [pc, #548]	; (20070414 <ADC_Handler+0x250>)
+200701ec:	4b91      	ldr	r3, [pc, #580]	; (20070434 <ADC_Handler+0x270>)
 200701ee:	601a      	str	r2, [r3, #0]
 
 void FIFO_Init(XFifo* Fifo );
@@ -12068,7 +12068,7 @@ void FIFO_Init(XFifo* Fifo );
 inline void FIFO_Insert(XFifo* Fifo, int32_t input)
 {
 	Fifo->Data[Fifo->WriteInx] = input;
-200701f0:	4989      	ldr	r1, [pc, #548]	; (20070418 <ADC_Handler+0x254>)
+200701f0:	4991      	ldr	r1, [pc, #580]	; (20070438 <ADC_Handler+0x274>)
 200701f2:	680b      	ldr	r3, [r1, #0]
 200701f4:	eb01 0083 	add.w	r0, r1, r3, lsl #2
 200701f8:	60c2      	str	r2, [r0, #12]
@@ -12093,7 +12093,7 @@ inline int32_t FIFO_Filter(XFifo* Fifo)
 		break;
 		default: // 2
 		Xn = Fifo->Data[1];
-20070208:	4b83      	ldr	r3, [pc, #524]	; (20070418 <ADC_Handler+0x254>)
+20070208:	4b8b      	ldr	r3, [pc, #556]	; (20070438 <ADC_Handler+0x274>)
 2007020a:	6919      	ldr	r1, [r3, #16]
 		Xnp = Fifo->Data[0];
 2007020c:	68d8      	ldr	r0, [r3, #12]
@@ -12104,26 +12104,26 @@ inline int32_t FIFO_Filter(XFifo* Fifo)
 20070212:	2200      	movs	r2, #0
 20070214:	600a      	str	r2, [r1, #0]
 		Xn = Fifo->Data[2];
-20070216:	4b80      	ldr	r3, [pc, #512]	; (20070418 <ADC_Handler+0x254>)
+20070216:	4b88      	ldr	r3, [pc, #544]	; (20070438 <ADC_Handler+0x274>)
 20070218:	6959      	ldr	r1, [r3, #20]
 		Xnp = Fifo->Data[1];
 2007021a:	6918      	ldr	r0, [r3, #16]
 		Xnpp = Fifo->Data[0];
 2007021c:	68db      	ldr	r3, [r3, #12]
 	switch(Fifo->WriteIndxY)
-2007021e:	4a7e      	ldr	r2, [pc, #504]	; (20070418 <ADC_Handler+0x254>)
+2007021e:	4a86      	ldr	r2, [pc, #536]	; (20070438 <ADC_Handler+0x274>)
 20070220:	6892      	ldr	r2, [r2, #8]
 20070222:	b152      	cbz	r2, 2007023a <ADC_Handler+0x76>
 20070224:	2a01      	cmp	r2, #1
 20070226:	d034      	beq.n	20070292 <ADC_Handler+0xce>
 		Yp = Fifo->FilterY[1];
-20070228:	4c7b      	ldr	r4, [pc, #492]	; (20070418 <ADC_Handler+0x254>)
+20070228:	4c83      	ldr	r4, [pc, #524]	; (20070438 <ADC_Handler+0x274>)
 2007022a:	69e5      	ldr	r5, [r4, #28]
 		Ypp = Fifo->FilterY[0];
 2007022c:	69a4      	ldr	r4, [r4, #24]
 2007022e:	e007      	b.n	20070240 <ADC_Handler+0x7c>
 		Xn = Fifo->Data[0];
-20070230:	4b79      	ldr	r3, [pc, #484]	; (20070418 <ADC_Handler+0x254>)
+20070230:	4b81      	ldr	r3, [pc, #516]	; (20070438 <ADC_Handler+0x274>)
 20070232:	68d9      	ldr	r1, [r3, #12]
 		Xnp = Fifo->Data[2];
 20070234:	6958      	ldr	r0, [r3, #20]
@@ -12131,14 +12131,14 @@ inline int32_t FIFO_Filter(XFifo* Fifo)
 20070236:	691b      	ldr	r3, [r3, #16]
 20070238:	e7f1      	b.n	2007021e <ADC_Handler+0x5a>
 		Yp = Fifo->FilterY[2];
-2007023a:	4c77      	ldr	r4, [pc, #476]	; (20070418 <ADC_Handler+0x254>)
+2007023a:	4c7f      	ldr	r4, [pc, #508]	; (20070438 <ADC_Handler+0x274>)
 2007023c:	6a25      	ldr	r5, [r4, #32]
 		Ypp = Fifo->FilterY[1];
 2007023e:	69e4      	ldr	r4, [r4, #28]
 	Out = (Xn*BETA_MUL2_Q - 2*BETA_MUL2_Q*Xnp + BETA_MUL2_Q*Xnpp + Fifo->BetaMul2Q*Yp - Ypp*BETA_MUL2_Q)*(Fifo->BetaSQRTInvQ); // The second order filter HPF*/
 20070240:	eba1 0140 	sub.w	r1, r1, r0, lsl #1
 20070244:	4419      	add	r1, r3
-20070246:	4874      	ldr	r0, [pc, #464]	; (20070418 <ADC_Handler+0x254>)
+20070246:	487c      	ldr	r0, [pc, #496]	; (20070438 <ADC_Handler+0x274>)
 20070248:	6b43      	ldr	r3, [r0, #52]	; 0x34
 2007024a:	fb03 f305 	mul.w	r3, r3, r5
 2007024e:	eb03 1301 	add.w	r3, r3, r1, lsl #4
@@ -12167,152 +12167,152 @@ inline int32_t FIFO_Filter(XFifo* Fifo)
 2007026c:	2b00      	cmp	r3, #0
 2007026e:	bfb8      	it	lt
 20070270:	425b      	neglt	r3, r3
-20070272:	4a6a      	ldr	r2, [pc, #424]	; (2007041c <ADC_Handler+0x258>)
+20070272:	4a72      	ldr	r2, [pc, #456]	; (2007043c <ADC_Handler+0x278>)
 20070274:	6013      	str	r3, [r2, #0]
 		//SoundSum = FIFO2_Insert(&Fifo2p1, OutData);		
 		//FIFO2_Insert(&fifoDebug,SoundSum);
 		switch(FilterState)		
-20070276:	4a6a      	ldr	r2, [pc, #424]	; (20070420 <ADC_Handler+0x25c>)
+20070276:	4a72      	ldr	r2, [pc, #456]	; (20070440 <ADC_Handler+0x27c>)
 20070278:	6812      	ldr	r2, [r2, #0]
 2007027a:	2a06      	cmp	r2, #6
-2007027c:	f200 80f3 	bhi.w	20070466 <ADC_Handler+0x2a2>
+2007027c:	f200 8106 	bhi.w	2007048c <ADC_Handler+0x2c8>
 20070280:	e8df f012 	tbh	[pc, r2, lsl #1]
 20070284:	002d000f 	.word	0x002d000f
 20070288:	006a004e 	.word	0x006a004e
-2007028c:	00e600a6 	.word	0x00e600a6
-20070290:	0107      	.short	0x0107
+2007028c:	00c200a7 	.word	0x00c200a7
+20070290:	00f8      	.short	0x00f8
 		Yp = Fifo->FilterY[0];
-20070292:	4c61      	ldr	r4, [pc, #388]	; (20070418 <ADC_Handler+0x254>)
+20070292:	4c69      	ldr	r4, [pc, #420]	; (20070438 <ADC_Handler+0x274>)
 20070294:	69a5      	ldr	r5, [r4, #24]
 		Ypp = Fifo->FilterY[2];
 20070296:	6a24      	ldr	r4, [r4, #32]
 20070298:	e7d2      	b.n	20070240 <ADC_Handler+0x7c>
 		Fifo->WriteIndxY = 0;
 2007029a:	2100      	movs	r1, #0
-2007029c:	4a5e      	ldr	r2, [pc, #376]	; (20070418 <ADC_Handler+0x254>)
+2007029c:	4a66      	ldr	r2, [pc, #408]	; (20070438 <ADC_Handler+0x274>)
 2007029e:	6091      	str	r1, [r2, #8]
 200702a0:	e7e4      	b.n	2007026c <ADC_Handler+0xa8>
 		{
 			case 0:
 				SecondDetVal = 0;
 200702a2:	2200      	movs	r2, #0
-200702a4:	495f      	ldr	r1, [pc, #380]	; (20070424 <ADC_Handler+0x260>)
+200702a4:	4967      	ldr	r1, [pc, #412]	; (20070444 <ADC_Handler+0x280>)
 200702a6:	600a      	str	r2, [r1, #0]
 				FirstDetVal = 0;
-200702a8:	495f      	ldr	r1, [pc, #380]	; (20070428 <ADC_Handler+0x264>)
+200702a8:	4967      	ldr	r1, [pc, #412]	; (20070448 <ADC_Handler+0x284>)
 200702aa:	600a      	str	r2, [r1, #0]
 				//MaxEnergy = 0;
 				if(OutData>MaxAllowedFirstVal)
-200702ac:	4a5f      	ldr	r2, [pc, #380]	; (2007042c <ADC_Handler+0x268>)
+200702ac:	4a67      	ldr	r2, [pc, #412]	; (2007044c <ADC_Handler+0x288>)
 200702ae:	6812      	ldr	r2, [r2, #0]
 200702b0:	4293      	cmp	r3, r2
 200702b2:	d906      	bls.n	200702c2 <ADC_Handler+0xfe>
 				{
 					FilterState = 5;
 200702b4:	2205      	movs	r2, #5
-200702b6:	4b5a      	ldr	r3, [pc, #360]	; (20070420 <ADC_Handler+0x25c>)
+200702b6:	4b62      	ldr	r3, [pc, #392]	; (20070440 <ADC_Handler+0x27c>)
 200702b8:	601a      	str	r2, [r3, #0]
 					delay = 0;
 200702ba:	2200      	movs	r2, #0
-200702bc:	4b5c      	ldr	r3, [pc, #368]	; (20070430 <ADC_Handler+0x26c>)
+200702bc:	4b64      	ldr	r3, [pc, #400]	; (20070450 <ADC_Handler+0x28c>)
 200702be:	601a      	str	r2, [r3, #0]
-200702c0:	e0d1      	b.n	20070466 <ADC_Handler+0x2a2>
+200702c0:	e0e4      	b.n	2007048c <ADC_Handler+0x2c8>
 				}
 				else if(OutData>Threshold)
-200702c2:	4a5c      	ldr	r2, [pc, #368]	; (20070434 <ADC_Handler+0x270>)
+200702c2:	4a64      	ldr	r2, [pc, #400]	; (20070454 <ADC_Handler+0x290>)
 200702c4:	6812      	ldr	r2, [r2, #0]
 200702c6:	4293      	cmp	r3, r2
-200702c8:	f240 80cd 	bls.w	20070466 <ADC_Handler+0x2a2>
+200702c8:	f240 80e0 	bls.w	2007048c <ADC_Handler+0x2c8>
 				{
 					//Det_flag = 1;
 					//adc_disable_interrupt(ADC,ADC_IER_EOC0);;
 					FirstDetVal = OutData;
-200702cc:	4a56      	ldr	r2, [pc, #344]	; (20070428 <ADC_Handler+0x264>)
+200702cc:	4a5e      	ldr	r2, [pc, #376]	; (20070448 <ADC_Handler+0x284>)
 200702ce:	6013      	str	r3, [r2, #0]
 					//MaxEnergy = Energy;
 					FilterState = 1;
 200702d0:	2201      	movs	r2, #1
-200702d2:	4b53      	ldr	r3, [pc, #332]	; (20070420 <ADC_Handler+0x25c>)
+200702d2:	4b5b      	ldr	r3, [pc, #364]	; (20070440 <ADC_Handler+0x27c>)
 200702d4:	601a      	str	r2, [r3, #0]
 					delay = 0;					
 200702d6:	2200      	movs	r2, #0
-200702d8:	4b55      	ldr	r3, [pc, #340]	; (20070430 <ADC_Handler+0x26c>)
+200702d8:	4b5d      	ldr	r3, [pc, #372]	; (20070450 <ADC_Handler+0x28c>)
 200702da:	601a      	str	r2, [r3, #0]
-200702dc:	e0c3      	b.n	20070466 <ADC_Handler+0x2a2>
+200702dc:	e0d6      	b.n	2007048c <ADC_Handler+0x2c8>
 				}	
 			break;
 			
 			case 1:
 				if(OutData>MaxAllowedFirstVal)
-200702de:	4a53      	ldr	r2, [pc, #332]	; (2007042c <ADC_Handler+0x268>)
+200702de:	4a5b      	ldr	r2, [pc, #364]	; (2007044c <ADC_Handler+0x288>)
 200702e0:	6812      	ldr	r2, [r2, #0]
 200702e2:	4293      	cmp	r3, r2
 200702e4:	d906      	bls.n	200702f4 <ADC_Handler+0x130>
 				{
 					FilterState = 5;
 200702e6:	2205      	movs	r2, #5
-200702e8:	4b4d      	ldr	r3, [pc, #308]	; (20070420 <ADC_Handler+0x25c>)
+200702e8:	4b55      	ldr	r3, [pc, #340]	; (20070440 <ADC_Handler+0x27c>)
 200702ea:	601a      	str	r2, [r3, #0]
 					delay = 0;
 200702ec:	2200      	movs	r2, #0
-200702ee:	4b50      	ldr	r3, [pc, #320]	; (20070430 <ADC_Handler+0x26c>)
+200702ee:	4b58      	ldr	r3, [pc, #352]	; (20070450 <ADC_Handler+0x28c>)
 200702f0:	601a      	str	r2, [r3, #0]
-200702f2:	e0b8      	b.n	20070466 <ADC_Handler+0x2a2>
+200702f2:	e0cb      	b.n	2007048c <ADC_Handler+0x2c8>
 				}
 				else
 				{
 					if(FirstDetVal<(OutData))
-200702f4:	4a4c      	ldr	r2, [pc, #304]	; (20070428 <ADC_Handler+0x264>)
+200702f4:	4a54      	ldr	r2, [pc, #336]	; (20070448 <ADC_Handler+0x284>)
 200702f6:	6812      	ldr	r2, [r2, #0]
 200702f8:	4293      	cmp	r3, r2
 					{					
 						FirstDetVal	= OutData; // finding the max FirstDetVal					
 200702fa:	bfc4      	itt	gt
-200702fc:	4a4a      	ldrgt	r2, [pc, #296]	; (20070428 <ADC_Handler+0x264>)
+200702fc:	4a52      	ldrgt	r2, [pc, #328]	; (20070448 <ADC_Handler+0x284>)
 200702fe:	6013      	strgt	r3, [r2, #0]
 					}				
 					delay++;
-20070300:	4a4b      	ldr	r2, [pc, #300]	; (20070430 <ADC_Handler+0x26c>)
+20070300:	4a53      	ldr	r2, [pc, #332]	; (20070450 <ADC_Handler+0x28c>)
 20070302:	6813      	ldr	r3, [r2, #0]
 20070304:	3301      	adds	r3, #1
 20070306:	6013      	str	r3, [r2, #0]
 					if(delay>=2600)
 20070308:	f640 2227 	movw	r2, #2599	; 0xa27
 2007030c:	4293      	cmp	r3, r2
-2007030e:	f240 80aa 	bls.w	20070466 <ADC_Handler+0x2a2>
+2007030e:	f240 80bd 	bls.w	2007048c <ADC_Handler+0x2c8>
 					{
 						FilterState = 2;
 20070312:	2202      	movs	r2, #2
-20070314:	4b42      	ldr	r3, [pc, #264]	; (20070420 <ADC_Handler+0x25c>)
+20070314:	4b4a      	ldr	r3, [pc, #296]	; (20070440 <ADC_Handler+0x27c>)
 20070316:	601a      	str	r2, [r3, #0]
 						delay = 0;
 20070318:	2200      	movs	r2, #0
-2007031a:	4b45      	ldr	r3, [pc, #276]	; (20070430 <ADC_Handler+0x26c>)
+2007031a:	4b4d      	ldr	r3, [pc, #308]	; (20070450 <ADC_Handler+0x28c>)
 2007031c:	601a      	str	r2, [r3, #0]
-2007031e:	e0a2      	b.n	20070466 <ADC_Handler+0x2a2>
+2007031e:	e0b5      	b.n	2007048c <ADC_Handler+0x2c8>
 				/*if(Energy > MaxEnergy)
 					MaxEnergy = Energy;*/
 			break;
 				
 			case 2:
 				if(OutData>FirstDetVal)
-20070320:	4a41      	ldr	r2, [pc, #260]	; (20070428 <ADC_Handler+0x264>)
+20070320:	4a49      	ldr	r2, [pc, #292]	; (20070448 <ADC_Handler+0x284>)
 20070322:	6812      	ldr	r2, [r2, #0]
 20070324:	4293      	cmp	r3, r2
 20070326:	dd06      	ble.n	20070336 <ADC_Handler+0x172>
 				{
 					FilterState = 5;
 20070328:	2205      	movs	r2, #5
-2007032a:	4b3d      	ldr	r3, [pc, #244]	; (20070420 <ADC_Handler+0x25c>)
+2007032a:	4b45      	ldr	r3, [pc, #276]	; (20070440 <ADC_Handler+0x27c>)
 2007032c:	601a      	str	r2, [r3, #0]
 					delay = 0;
 2007032e:	2200      	movs	r2, #0
-20070330:	4b3f      	ldr	r3, [pc, #252]	; (20070430 <ADC_Handler+0x26c>)
+20070330:	4b47      	ldr	r3, [pc, #284]	; (20070450 <ADC_Handler+0x28c>)
 20070332:	601a      	str	r2, [r3, #0]
-20070334:	e097      	b.n	20070466 <ADC_Handler+0x2a2>
+20070334:	e0aa      	b.n	2007048c <ADC_Handler+0x2c8>
 				}				
 				else if(delay<9000)
-20070336:	4b3e      	ldr	r3, [pc, #248]	; (20070430 <ADC_Handler+0x26c>)
+20070336:	4b46      	ldr	r3, [pc, #280]	; (20070450 <ADC_Handler+0x28c>)
 20070338:	681b      	ldr	r3, [r3, #0]
 2007033a:	f242 3227 	movw	r2, #8999	; 0x2327
 2007033e:	4293      	cmp	r3, r2
@@ -12320,367 +12320,378 @@ inline int32_t FIFO_Filter(XFifo* Fifo)
 				{
 					delay++;
 20070342:	3301      	adds	r3, #1
-20070344:	4a3a      	ldr	r2, [pc, #232]	; (20070430 <ADC_Handler+0x26c>)
+20070344:	4a42      	ldr	r2, [pc, #264]	; (20070450 <ADC_Handler+0x28c>)
 20070346:	6013      	str	r3, [r2, #0]
-20070348:	e08d      	b.n	20070466 <ADC_Handler+0x2a2>
+20070348:	e0a0      	b.n	2007048c <ADC_Handler+0x2c8>
 				}
 				else
 				{
 					FilterState = 3;
 2007034a:	2203      	movs	r2, #3
-2007034c:	4b34      	ldr	r3, [pc, #208]	; (20070420 <ADC_Handler+0x25c>)
+2007034c:	4b3c      	ldr	r3, [pc, #240]	; (20070440 <ADC_Handler+0x27c>)
 2007034e:	601a      	str	r2, [r3, #0]
 					delay = 0;
 20070350:	2200      	movs	r2, #0
-20070352:	4b37      	ldr	r3, [pc, #220]	; (20070430 <ADC_Handler+0x26c>)
+20070352:	4b3f      	ldr	r3, [pc, #252]	; (20070450 <ADC_Handler+0x28c>)
 20070354:	601a      	str	r2, [r3, #0]
-20070356:	e086      	b.n	20070466 <ADC_Handler+0x2a2>
+20070356:	e099      	b.n	2007048c <ADC_Handler+0x2c8>
 				}				
 			break;
 			
 			case 3:
 				if(delay<10000)
-20070358:	4a35      	ldr	r2, [pc, #212]	; (20070430 <ADC_Handler+0x26c>)
+20070358:	4a3d      	ldr	r2, [pc, #244]	; (20070450 <ADC_Handler+0x28c>)
 2007035a:	6812      	ldr	r2, [r2, #0]
 2007035c:	f242 710f 	movw	r1, #9999	; 0x270f
 20070360:	428a      	cmp	r2, r1
-20070362:	d809      	bhi.n	20070378 <ADC_Handler+0x1b4>
+20070362:	d80a      	bhi.n	2007037a <ADC_Handler+0x1b6>
 				{
 					delay++;
 20070364:	3201      	adds	r2, #1
-20070366:	4932      	ldr	r1, [pc, #200]	; (20070430 <ADC_Handler+0x26c>)
+20070366:	493a      	ldr	r1, [pc, #232]	; (20070450 <ADC_Handler+0x28c>)
 20070368:	600a      	str	r2, [r1, #0]
 					if(SecondDetVal<OutData)					
-2007036a:	4a2e      	ldr	r2, [pc, #184]	; (20070424 <ADC_Handler+0x260>)
+2007036a:	4a36      	ldr	r2, [pc, #216]	; (20070444 <ADC_Handler+0x280>)
 2007036c:	6812      	ldr	r2, [r2, #0]
 2007036e:	4293      	cmp	r3, r2
-20070370:	dd79      	ble.n	20070466 <ADC_Handler+0x2a2>
+20070370:	f340 808c 	ble.w	2007048c <ADC_Handler+0x2c8>
 						SecondDetVal = OutData;
-20070372:	4a2c      	ldr	r2, [pc, #176]	; (20070424 <ADC_Handler+0x260>)
-20070374:	6013      	str	r3, [r2, #0]
-20070376:	e076      	b.n	20070466 <ADC_Handler+0x2a2>
+20070374:	4a33      	ldr	r2, [pc, #204]	; (20070444 <ADC_Handler+0x280>)
+20070376:	6013      	str	r3, [r2, #0]
+20070378:	e088      	b.n	2007048c <ADC_Handler+0x2c8>
 				}
 				else
 				{
 					if( ((SecondDetVal/5)<=(FirstDetVal/2)) && ((SecondDetVal/126)>=(FirstDetVal/100)) )  //last working value = 1.25
-20070378:	4b2a      	ldr	r3, [pc, #168]	; (20070424 <ADC_Handler+0x260>)
-2007037a:	681b      	ldr	r3, [r3, #0]
-2007037c:	4a2a      	ldr	r2, [pc, #168]	; (20070428 <ADC_Handler+0x264>)
-2007037e:	6812      	ldr	r2, [r2, #0]
-20070380:	482d      	ldr	r0, [pc, #180]	; (20070438 <ADC_Handler+0x274>)
-20070382:	fb80 1003 	smull	r1, r0, r0, r3
-20070386:	17d9      	asrs	r1, r3, #31
-20070388:	ebc1 0160 	rsb	r1, r1, r0, asr #1
-2007038c:	eb02 70d2 	add.w	r0, r2, r2, lsr #31
-20070390:	ebb1 0f60 	cmp.w	r1, r0, asr #1
-20070394:	dc15      	bgt.n	200703c2 <ADC_Handler+0x1fe>
-20070396:	4929      	ldr	r1, [pc, #164]	; (2007043c <ADC_Handler+0x278>)
-20070398:	fb81 0103 	smull	r0, r1, r1, r3
-2007039c:	4419      	add	r1, r3
-2007039e:	17db      	asrs	r3, r3, #31
-200703a0:	ebc3 13a1 	rsb	r3, r3, r1, asr #6
-200703a4:	4926      	ldr	r1, [pc, #152]	; (20070440 <ADC_Handler+0x27c>)
-200703a6:	fb81 0102 	smull	r0, r1, r1, r2
-200703aa:	17d2      	asrs	r2, r2, #31
-200703ac:	ebc2 1261 	rsb	r2, r2, r1, asr #5
-200703b0:	4293      	cmp	r3, r2
-200703b2:	db06      	blt.n	200703c2 <ADC_Handler+0x1fe>
+2007037a:	4b32      	ldr	r3, [pc, #200]	; (20070444 <ADC_Handler+0x280>)
+2007037c:	681b      	ldr	r3, [r3, #0]
+2007037e:	4a32      	ldr	r2, [pc, #200]	; (20070448 <ADC_Handler+0x284>)
+20070380:	6812      	ldr	r2, [r2, #0]
+20070382:	4835      	ldr	r0, [pc, #212]	; (20070458 <ADC_Handler+0x294>)
+20070384:	fb80 1003 	smull	r1, r0, r0, r3
+20070388:	17d9      	asrs	r1, r3, #31
+2007038a:	ebc1 0160 	rsb	r1, r1, r0, asr #1
+2007038e:	eb02 70d2 	add.w	r0, r2, r2, lsr #31
+20070392:	ebb1 0f60 	cmp.w	r1, r0, asr #1
+20070396:	dc15      	bgt.n	200703c4 <ADC_Handler+0x200>
+20070398:	4930      	ldr	r1, [pc, #192]	; (2007045c <ADC_Handler+0x298>)
+2007039a:	fb81 0103 	smull	r0, r1, r1, r3
+2007039e:	4419      	add	r1, r3
+200703a0:	17db      	asrs	r3, r3, #31
+200703a2:	ebc3 13a1 	rsb	r3, r3, r1, asr #6
+200703a6:	492e      	ldr	r1, [pc, #184]	; (20070460 <ADC_Handler+0x29c>)
+200703a8:	fb81 0102 	smull	r0, r1, r1, r2
+200703ac:	17d2      	asrs	r2, r2, #31
+200703ae:	ebc2 1261 	rsb	r2, r2, r1, asr #5
+200703b2:	4293      	cmp	r3, r2
+200703b4:	db06      	blt.n	200703c4 <ADC_Handler+0x200>
 					{
 						FilterState = 4;
-200703b4:	2204      	movs	r2, #4
-200703b6:	4b1a      	ldr	r3, [pc, #104]	; (20070420 <ADC_Handler+0x25c>)
-200703b8:	601a      	str	r2, [r3, #0]
+200703b6:	2204      	movs	r2, #4
+200703b8:	4b21      	ldr	r3, [pc, #132]	; (20070440 <ADC_Handler+0x27c>)
+200703ba:	601a      	str	r2, [r3, #0]
 						delay = 0;
-200703ba:	2200      	movs	r2, #0
-200703bc:	4b1c      	ldr	r3, [pc, #112]	; (20070430 <ADC_Handler+0x26c>)
-200703be:	601a      	str	r2, [r3, #0]
-200703c0:	e051      	b.n	20070466 <ADC_Handler+0x2a2>
+200703bc:	2200      	movs	r2, #0
+200703be:	4b24      	ldr	r3, [pc, #144]	; (20070450 <ADC_Handler+0x28c>)
+200703c0:	601a      	str	r2, [r3, #0]
+200703c2:	e063      	b.n	2007048c <ADC_Handler+0x2c8>
 					}
 					else
 					{
 						FilterState = 5;
-200703c2:	2205      	movs	r2, #5
-200703c4:	4b16      	ldr	r3, [pc, #88]	; (20070420 <ADC_Handler+0x25c>)
-200703c6:	601a      	str	r2, [r3, #0]
+200703c4:	2205      	movs	r2, #5
+200703c6:	4b1e      	ldr	r3, [pc, #120]	; (20070440 <ADC_Handler+0x27c>)
+200703c8:	601a      	str	r2, [r3, #0]
 						delay = 0;
-200703c8:	2200      	movs	r2, #0
-200703ca:	4b19      	ldr	r3, [pc, #100]	; (20070430 <ADC_Handler+0x26c>)
-200703cc:	601a      	str	r2, [r3, #0]
-200703ce:	e04a      	b.n	20070466 <ADC_Handler+0x2a2>
+200703ca:	2200      	movs	r2, #0
+200703cc:	4b20      	ldr	r3, [pc, #128]	; (20070450 <ADC_Handler+0x28c>)
+200703ce:	601a      	str	r2, [r3, #0]
+200703d0:	e05c      	b.n	2007048c <ADC_Handler+0x2c8>
 					}
 				}				
 			break;
 			
 			case 4:
 				if(delay<250)
-200703d0:	4b17      	ldr	r3, [pc, #92]	; (20070430 <ADC_Handler+0x26c>)
-200703d2:	681b      	ldr	r3, [r3, #0]
-200703d4:	2bf9      	cmp	r3, #249	; 0xf9
-200703d6:	d803      	bhi.n	200703e0 <ADC_Handler+0x21c>
+200703d2:	4b1f      	ldr	r3, [pc, #124]	; (20070450 <ADC_Handler+0x28c>)
+200703d4:	681b      	ldr	r3, [r3, #0]
+200703d6:	2bf9      	cmp	r3, #249	; 0xf9
+200703d8:	d803      	bhi.n	200703e2 <ADC_Handler+0x21e>
 				{
 					delay++;					
-200703d8:	3301      	adds	r3, #1
-200703da:	4a15      	ldr	r2, [pc, #84]	; (20070430 <ADC_Handler+0x26c>)
-200703dc:	6013      	str	r3, [r2, #0]
-200703de:	e042      	b.n	20070466 <ADC_Handler+0x2a2>
+200703da:	3301      	adds	r3, #1
+200703dc:	4a1c      	ldr	r2, [pc, #112]	; (20070450 <ADC_Handler+0x28c>)
+200703de:	6013      	str	r3, [r2, #0]
+200703e0:	e054      	b.n	2007048c <ADC_Handler+0x2c8>
 				}
 				else
 				{
 					Det_flag = 1;
-200703e0:	2201      	movs	r2, #1
-200703e2:	4b18      	ldr	r3, [pc, #96]	; (20070444 <ADC_Handler+0x280>)
-200703e4:	601a      	str	r2, [r3, #0]
+200703e2:	2201      	movs	r2, #1
+200703e4:	4b1f      	ldr	r3, [pc, #124]	; (20070464 <ADC_Handler+0x2a0>)
+200703e6:	601a      	str	r2, [r3, #0]
 					FilterState = 6;
-200703e6:	2206      	movs	r2, #6
-200703e8:	4b0d      	ldr	r3, [pc, #52]	; (20070420 <ADC_Handler+0x25c>)
-200703ea:	601a      	str	r2, [r3, #0]
+200703e8:	2206      	movs	r2, #6
+200703ea:	4b15      	ldr	r3, [pc, #84]	; (20070440 <ADC_Handler+0x27c>)
+200703ec:	601a      	str	r2, [r3, #0]
 					delay = 0;
-200703ec:	2200      	movs	r2, #0
-200703ee:	4b10      	ldr	r3, [pc, #64]	; (20070430 <ADC_Handler+0x26c>)
-200703f0:	601a      	str	r2, [r3, #0]
+200703ee:	2200      	movs	r2, #0
+200703f0:	4b17      	ldr	r3, [pc, #92]	; (20070450 <ADC_Handler+0x28c>)
+200703f2:	601a      	str	r2, [r3, #0]
 					adc_disable_interrupt(ADC,ADC_IER_ENDRX);
-200703f2:	4c05      	ldr	r4, [pc, #20]	; (20070408 <ADC_Handler+0x244>)
-200703f4:	f04f 6100 	mov.w	r1, #134217728	; 0x8000000
-200703f8:	4620      	mov	r0, r4
-200703fa:	4b13      	ldr	r3, [pc, #76]	; (20070448 <ADC_Handler+0x284>)
-200703fc:	4798      	blx	r3
+200703f4:	4c0c      	ldr	r4, [pc, #48]	; (20070428 <ADC_Handler+0x264>)
+200703f6:	f04f 6100 	mov.w	r1, #134217728	; 0x8000000
+200703fa:	4620      	mov	r0, r4
+200703fc:	4b1a      	ldr	r3, [pc, #104]	; (20070468 <ADC_Handler+0x2a4>)
+200703fe:	4798      	blx	r3
 					adc_reset(ADC);
-200703fe:	4620      	mov	r0, r4
-20070400:	4b12      	ldr	r3, [pc, #72]	; (2007044c <ADC_Handler+0x288>)
-20070402:	4798      	blx	r3
-20070404:	e02f      	b.n	20070466 <ADC_Handler+0x2a2>
-20070406:	bf00      	nop
-20070408:	400c0000 	.word	0x400c0000
-2007040c:	00081177 	.word	0x00081177
-20070410:	20071068 	.word	0x20071068
-20070414:	2007107c 	.word	0x2007107c
-20070418:	20071094 	.word	0x20071094
-2007041c:	20071030 	.word	0x20071030
-20070420:	200704e0 	.word	0x200704e0
-20070424:	2007108c 	.word	0x2007108c
-20070428:	20071084 	.word	0x20071084
-2007042c:	200704e4 	.word	0x200704e4
-20070430:	20071088 	.word	0x20071088
-20070434:	200704e8 	.word	0x200704e8
-20070438:	66666667 	.word	0x66666667
-2007043c:	82082083 	.word	0x82082083
-20070440:	51eb851f 	.word	0x51eb851f
-20070444:	2007102c 	.word	0x2007102c
-20070448:	000801f1 	.word	0x000801f1
-2007044c:	000801d5 	.word	0x000801d5
+20070400:	4620      	mov	r0, r4
+20070402:	4b1a      	ldr	r3, [pc, #104]	; (2007046c <ADC_Handler+0x2a8>)
+20070404:	4798      	blx	r3
+20070406:	e041      	b.n	2007048c <ADC_Handler+0x2c8>
 				}				
 			break;
 			
 			case 5: // Noise state
 				if(delay<150000) //3 seconds hold off due noise
-20070450:	4b19      	ldr	r3, [pc, #100]	; (200704b8 <ADC_Handler+0x2f4>)
-20070452:	681b      	ldr	r3, [r3, #0]
-20070454:	4a19      	ldr	r2, [pc, #100]	; (200704bc <ADC_Handler+0x2f8>)
-20070456:	4293      	cmp	r3, r2
+20070408:	4b11      	ldr	r3, [pc, #68]	; (20070450 <ADC_Handler+0x28c>)
+2007040a:	681b      	ldr	r3, [r3, #0]
+2007040c:	4a18      	ldr	r2, [pc, #96]	; (20070470 <ADC_Handler+0x2ac>)
+2007040e:	4293      	cmp	r3, r2
+20070410:	d803      	bhi.n	2007041a <ADC_Handler+0x256>
 				{					
 					delay++;
-20070458:	bf91      	iteee	ls
-2007045a:	3301      	addls	r3, #1
+20070412:	3301      	adds	r3, #1
+20070414:	4a0e      	ldr	r2, [pc, #56]	; (20070450 <ADC_Handler+0x28c>)
+20070416:	6013      	str	r3, [r2, #0]
+20070418:	e038      	b.n	2007048c <ADC_Handler+0x2c8>
 				}
 				else
 				{					
-					FilterState = 0;
-2007045c:	2300      	movhi	r3, #0
-2007045e:	4a18      	ldrhi	r2, [pc, #96]	; (200704c0 <ADC_Handler+0x2fc>)
-20070460:	6013      	strhi	r3, [r2, #0]
+					FilterState = 6;
+2007041a:	2206      	movs	r2, #6
+2007041c:	4b08      	ldr	r3, [pc, #32]	; (20070440 <ADC_Handler+0x27c>)
+2007041e:	601a      	str	r2, [r3, #0]
 					delay = 0;
-20070462:	4a15      	ldr	r2, [pc, #84]	; (200704b8 <ADC_Handler+0x2f4>)
-20070464:	6013      	str	r3, [r2, #0]
+20070420:	2200      	movs	r2, #0
+20070422:	4b0b      	ldr	r3, [pc, #44]	; (20070450 <ADC_Handler+0x28c>)
+20070424:	601a      	str	r2, [r3, #0]
+20070426:	e031      	b.n	2007048c <ADC_Handler+0x2c8>
+20070428:	400c0000 	.word	0x400c0000
+2007042c:	00081177 	.word	0x00081177
+20070430:	20071070 	.word	0x20071070
+20070434:	20071084 	.word	0x20071084
+20070438:	2007109c 	.word	0x2007109c
+2007043c:	20071038 	.word	0x20071038
+20070440:	200704e8 	.word	0x200704e8
+20070444:	20071094 	.word	0x20071094
+20070448:	2007108c 	.word	0x2007108c
+2007044c:	200704ec 	.word	0x200704ec
+20070450:	20071090 	.word	0x20071090
+20070454:	200704f0 	.word	0x200704f0
+20070458:	66666667 	.word	0x66666667
+2007045c:	82082083 	.word	0x82082083
+20070460:	51eb851f 	.word	0x51eb851f
+20070464:	20071034 	.word	0x20071034
+20070468:	000801f1 	.word	0x000801f1
+2007046c:	000801d5 	.word	0x000801d5
+20070470:	000249ef 	.word	0x000249ef
+				}			
+			break;
+			
+			case 6:
+				if(delay<25000) //0.5 seconds to stable the filter
+20070474:	4b13      	ldr	r3, [pc, #76]	; (200704c4 <ADC_Handler+0x300>)
+20070476:	681b      	ldr	r3, [r3, #0]
+20070478:	f246 12a7 	movw	r2, #24999	; 0x61a7
+2007047c:	4293      	cmp	r3, r2
+				{
+					delay++;
+2007047e:	bf91      	iteee	ls
+20070480:	3301      	addls	r3, #1
+				}
+				else
+				{
+					FilterState = 0;
+20070482:	2300      	movhi	r3, #0
+20070484:	4a10      	ldrhi	r2, [pc, #64]	; (200704c8 <ADC_Handler+0x304>)
+20070486:	6013      	strhi	r3, [r2, #0]
+					delay = 0;
+20070488:	4a0e      	ldr	r2, [pc, #56]	; (200704c4 <ADC_Handler+0x300>)
+2007048a:	6013      	str	r3, [r2, #0]
 				break;
 			default:break;
 			
 		}	
 		//pio_set_pin_low(LED2_GPIO);// for real time debug
 		if(!pio_get_pin_value(PIO_PA15_IDX))
-20070466:	200f      	movs	r0, #15
-20070468:	4b16      	ldr	r3, [pc, #88]	; (200704c4 <ADC_Handler+0x300>)
-2007046a:	4798      	blx	r3
-2007046c:	b9f0      	cbnz	r0, 200704ac <ADC_Handler+0x2e8>
+2007048c:	200f      	movs	r0, #15
+2007048e:	4b0f      	ldr	r3, [pc, #60]	; (200704cc <ADC_Handler+0x308>)
+20070490:	4798      	blx	r3
+20070492:	b988      	cbnz	r0, 200704b8 <ADC_Handler+0x2f4>
 		{
 			OutDataToDAC0  = (FirstDetVal>>9)&0xfff;			
-2007046e:	4b16      	ldr	r3, [pc, #88]	; (200704c8 <ADC_Handler+0x304>)
-20070470:	6818      	ldr	r0, [r3, #0]
-20070472:	f3c0 204b 	ubfx	r0, r0, #9, #12
+20070494:	4b0e      	ldr	r3, [pc, #56]	; (200704d0 <ADC_Handler+0x30c>)
+20070496:	6818      	ldr	r0, [r3, #0]
+20070498:	f3c0 204b 	ubfx	r0, r0, #9, #12
 			OutDataToDAC1  = ((SecondDetVal>>9)&0xfff)|(1<<12);			
-20070476:	4b15      	ldr	r3, [pc, #84]	; (200704cc <ADC_Handler+0x308>)
-20070478:	681c      	ldr	r4, [r3, #0]
-2007047a:	f3c4 244b 	ubfx	r4, r4, #9, #12
-2007047e:	f444 5480 	orr.w	r4, r4, #4096	; 0x1000
+2007049c:	4b0d      	ldr	r3, [pc, #52]	; (200704d4 <ADC_Handler+0x310>)
+2007049e:	681c      	ldr	r4, [r3, #0]
+200704a0:	f3c4 244b 	ubfx	r4, r4, #9, #12
+200704a4:	f444 5480 	orr.w	r4, r4, #4096	; 0x1000
 		{
 			OutDataToDAC0 = MAX_SIGNAL<<(17-9);
 			OutDataToDAC1  = ((MAX_SIGNAL)<<(17-9))|(1<<12);
 			//OutDataToDAC1  = (1<<(28-18))|(1<<12);
 		}
 		DAC3X8E_write(OutDataToDAC0);
-20070482:	4d13      	ldr	r5, [pc, #76]	; (200704d0 <ADC_Handler+0x30c>)
-20070484:	47a8      	blx	r5
+200704a8:	4d0b      	ldr	r5, [pc, #44]	; (200704d8 <ADC_Handler+0x314>)
+200704aa:	47a8      	blx	r5
 		DAC3X8E_write(OutDataToDAC1);
-20070486:	4620      	mov	r0, r4
-20070488:	47a8      	blx	r5
+200704ac:	4620      	mov	r0, r4
+200704ae:	47a8      	blx	r5
 		pio_set_pin_low(PIO_PA7_IDX);
-2007048a:	2007      	movs	r0, #7
-2007048c:	4b11      	ldr	r3, [pc, #68]	; (200704d4 <ADC_Handler+0x310>)
-2007048e:	4798      	blx	r3
+200704b0:	2007      	movs	r0, #7
+200704b2:	4b0a      	ldr	r3, [pc, #40]	; (200704dc <ADC_Handler+0x318>)
+200704b4:	4798      	blx	r3
 	}
 }
-20070490:	e69e      	b.n	200701d0 <ADC_Handler+0xc>
-				if(delay<50000) //1 seconds to stable the filter
-20070492:	4b09      	ldr	r3, [pc, #36]	; (200704b8 <ADC_Handler+0x2f4>)
-20070494:	681b      	ldr	r3, [r3, #0]
-20070496:	f24c 324f 	movw	r2, #49999	; 0xc34f
-2007049a:	4293      	cmp	r3, r2
-					delay++;
-2007049c:	bf91      	iteee	ls
-2007049e:	3301      	addls	r3, #1
-					FilterState = 0;
-200704a0:	2300      	movhi	r3, #0
-200704a2:	4a07      	ldrhi	r2, [pc, #28]	; (200704c0 <ADC_Handler+0x2fc>)
-200704a4:	6013      	strhi	r3, [r2, #0]
-					delay = 0;
-200704a6:	4a04      	ldr	r2, [pc, #16]	; (200704b8 <ADC_Handler+0x2f4>)
-200704a8:	6013      	str	r3, [r2, #0]
-200704aa:	e7dc      	b.n	20070466 <ADC_Handler+0x2a2>
+200704b6:	e68b      	b.n	200701d0 <ADC_Handler+0xc>
 			OutDataToDAC1  = ((MAX_SIGNAL)<<(17-9))|(1<<12);
-200704ac:	f44f 54c8 	mov.w	r4, #6400	; 0x1900
+200704b8:	f44f 54c8 	mov.w	r4, #6400	; 0x1900
 			OutDataToDAC0 = MAX_SIGNAL<<(17-9);
-200704b0:	f44f 6010 	mov.w	r0, #2304	; 0x900
-200704b4:	e7e5      	b.n	20070482 <ADC_Handler+0x2be>
-200704b6:	bf00      	nop
-200704b8:	20071088 	.word	0x20071088
-200704bc:	000249ef 	.word	0x000249ef
-200704c0:	200704e0 	.word	0x200704e0
-200704c4:	0008115b 	.word	0x0008115b
-200704c8:	20071084 	.word	0x20071084
-200704cc:	2007108c 	.word	0x2007108c
-200704d0:	00080321 	.word	0x00080321
-200704d4:	00081191 	.word	0x00081191
+200704bc:	f44f 6010 	mov.w	r0, #2304	; 0x900
+200704c0:	e7f2      	b.n	200704a8 <ADC_Handler+0x2e4>
+200704c2:	bf00      	nop
+200704c4:	20071090 	.word	0x20071090
+200704c8:	200704e8 	.word	0x200704e8
+200704cc:	0008115b 	.word	0x0008115b
+200704d0:	2007108c 	.word	0x2007108c
+200704d4:	20071094 	.word	0x20071094
+200704d8:	00080321 	.word	0x00080321
+200704dc:	00081191 	.word	0x00081191
 
-200704d8 <g_interrupt_enabled>:
-200704d8:	00000001                                ....
+200704e0 <g_interrupt_enabled>:
+200704e0:	00000001                                ....
 
-200704dc <SystemCoreClock>:
-200704dc:	003d0900                                ..=.
+200704e4 <SystemCoreClock>:
+200704e4:	003d0900                                ..=.
 
-200704e0 <FilterState>:
-200704e0:	00000006                                ....
+200704e8 <FilterState>:
+200704e8:	00000006                                ....
 
-200704e4 <MaxAllowedFirstVal>:
-200704e4:	ffffffff                                ....
+200704ec <MaxAllowedFirstVal>:
+200704ec:	ffffffff                                ....
 
-200704e8 <Threshold>:
-200704e8:	00000fa0                                ....
+200704f0 <Threshold>:
+200704f0:	00000fa0                                ....
 
-200704ec <_impure_ptr>:
-200704ec:	200704f0                                ... 
+200704f4 <_impure_ptr>:
+200704f4:	200704f8                                ... 
 
-200704f0 <impure_data>:
-200704f0:	00000000 200707dc 20070844 200708ac     ....... D.. ... 
+200704f8 <impure_data>:
+200704f8:	00000000 200707e4 2007084c 200708b4     ....... L.. ... 
 	...
-20070598:	00000001 00000000 abcd330e e66d1234     .........3..4.m.
-200705a8:	0005deec 0000000b 00000000 00000000     ................
-	...
-
-20070918 <__atexit_recursive_mutex>:
-20070918:	200710d0                                ... 
-
-2007091c <__global_locale>:
-2007091c:	00000043 00000000 00000000 00000000     C...............
-	...
-2007093c:	00000043 00000000 00000000 00000000     C...............
-	...
-2007095c:	00000043 00000000 00000000 00000000     C...............
-	...
-2007097c:	00000043 00000000 00000000 00000000     C...............
-	...
-2007099c:	00000043 00000000 00000000 00000000     C...............
-	...
-200709bc:	00000043 00000000 00000000 00000000     C...............
-	...
-200709dc:	00000043 00000000 00000000 00000000     C...............
-	...
-200709fc:	000854c9 000848ad 00000000 0008647c     .T...H......|d..
-20070a0c:	00086378 000862c0 000862c0 000862c0     xc...b...b...b..
-20070a1c:	000862c0 000862c0 000862c0 000862c0     .b...b...b...b..
-20070a2c:	000862c0 000862c0 ffffffff ffffffff     .b...b..........
-20070a3c:	ffffffff 0000ffff 53410001 00494943     ..........ASCII.
-	...
-20070a64:	53410000 00494943 00000000 00000000     ..ASCII.........
+200705a0:	00000001 00000000 abcd330e e66d1234     .........3..4.m.
+200705b0:	0005deec 0000000b 00000000 00000000     ................
 	...
 
-20070a88 <__malloc_av_>:
+20070920 <__atexit_recursive_mutex>:
+20070920:	200710d8                                ... 
+
+20070924 <__global_locale>:
+20070924:	00000043 00000000 00000000 00000000     C...............
 	...
-20070a90:	20070a88 20070a88 20070a90 20070a90     ... ... ... ... 
-20070aa0:	20070a98 20070a98 20070aa0 20070aa0     ... ... ... ... 
-20070ab0:	20070aa8 20070aa8 20070ab0 20070ab0     ... ... ... ... 
-20070ac0:	20070ab8 20070ab8 20070ac0 20070ac0     ... ... ... ... 
-20070ad0:	20070ac8 20070ac8 20070ad0 20070ad0     ... ... ... ... 
-20070ae0:	20070ad8 20070ad8 20070ae0 20070ae0     ... ... ... ... 
-20070af0:	20070ae8 20070ae8 20070af0 20070af0     ... ... ... ... 
-20070b00:	20070af8 20070af8 20070b00 20070b00     ... ... ... ... 
-20070b10:	20070b08 20070b08 20070b10 20070b10     ... ... ... ... 
-20070b20:	20070b18 20070b18 20070b20 20070b20     ... ...  ..  .. 
-20070b30:	20070b28 20070b28 20070b30 20070b30     (.. (.. 0.. 0.. 
-20070b40:	20070b38 20070b38 20070b40 20070b40     8.. 8.. @.. @.. 
-20070b50:	20070b48 20070b48 20070b50 20070b50     H.. H.. P.. P.. 
-20070b60:	20070b58 20070b58 20070b60 20070b60     X.. X.. `.. `.. 
-20070b70:	20070b68 20070b68 20070b70 20070b70     h.. h.. p.. p.. 
-20070b80:	20070b78 20070b78 20070b80 20070b80     x.. x.. ... ... 
-20070b90:	20070b88 20070b88 20070b90 20070b90     ... ... ... ... 
-20070ba0:	20070b98 20070b98 20070ba0 20070ba0     ... ... ... ... 
-20070bb0:	20070ba8 20070ba8 20070bb0 20070bb0     ... ... ... ... 
-20070bc0:	20070bb8 20070bb8 20070bc0 20070bc0     ... ... ... ... 
-20070bd0:	20070bc8 20070bc8 20070bd0 20070bd0     ... ... ... ... 
-20070be0:	20070bd8 20070bd8 20070be0 20070be0     ... ... ... ... 
-20070bf0:	20070be8 20070be8 20070bf0 20070bf0     ... ... ... ... 
-20070c00:	20070bf8 20070bf8 20070c00 20070c00     ... ... ... ... 
-20070c10:	20070c08 20070c08 20070c10 20070c10     ... ... ... ... 
-20070c20:	20070c18 20070c18 20070c20 20070c20     ... ...  ..  .. 
-20070c30:	20070c28 20070c28 20070c30 20070c30     (.. (.. 0.. 0.. 
-20070c40:	20070c38 20070c38 20070c40 20070c40     8.. 8.. @.. @.. 
-20070c50:	20070c48 20070c48 20070c50 20070c50     H.. H.. P.. P.. 
-20070c60:	20070c58 20070c58 20070c60 20070c60     X.. X.. `.. `.. 
-20070c70:	20070c68 20070c68 20070c70 20070c70     h.. h.. p.. p.. 
-20070c80:	20070c78 20070c78 20070c80 20070c80     x.. x.. ... ... 
-20070c90:	20070c88 20070c88 20070c90 20070c90     ... ... ... ... 
-20070ca0:	20070c98 20070c98 20070ca0 20070ca0     ... ... ... ... 
-20070cb0:	20070ca8 20070ca8 20070cb0 20070cb0     ... ... ... ... 
-20070cc0:	20070cb8 20070cb8 20070cc0 20070cc0     ... ... ... ... 
-20070cd0:	20070cc8 20070cc8 20070cd0 20070cd0     ... ... ... ... 
-20070ce0:	20070cd8 20070cd8 20070ce0 20070ce0     ... ... ... ... 
-20070cf0:	20070ce8 20070ce8 20070cf0 20070cf0     ... ... ... ... 
-20070d00:	20070cf8 20070cf8 20070d00 20070d00     ... ... ... ... 
-20070d10:	20070d08 20070d08 20070d10 20070d10     ... ... ... ... 
-20070d20:	20070d18 20070d18 20070d20 20070d20     ... ...  ..  .. 
-20070d30:	20070d28 20070d28 20070d30 20070d30     (.. (.. 0.. 0.. 
-20070d40:	20070d38 20070d38 20070d40 20070d40     8.. 8.. @.. @.. 
-20070d50:	20070d48 20070d48 20070d50 20070d50     H.. H.. P.. P.. 
-20070d60:	20070d58 20070d58 20070d60 20070d60     X.. X.. `.. `.. 
-20070d70:	20070d68 20070d68 20070d70 20070d70     h.. h.. p.. p.. 
-20070d80:	20070d78 20070d78 20070d80 20070d80     x.. x.. ... ... 
-20070d90:	20070d88 20070d88 20070d90 20070d90     ... ... ... ... 
-20070da0:	20070d98 20070d98 20070da0 20070da0     ... ... ... ... 
-20070db0:	20070da8 20070da8 20070db0 20070db0     ... ... ... ... 
-20070dc0:	20070db8 20070db8 20070dc0 20070dc0     ... ... ... ... 
-20070dd0:	20070dc8 20070dc8 20070dd0 20070dd0     ... ... ... ... 
-20070de0:	20070dd8 20070dd8 20070de0 20070de0     ... ... ... ... 
-20070df0:	20070de8 20070de8 20070df0 20070df0     ... ... ... ... 
-20070e00:	20070df8 20070df8 20070e00 20070e00     ... ... ... ... 
-20070e10:	20070e08 20070e08 20070e10 20070e10     ... ... ... ... 
-20070e20:	20070e18 20070e18 20070e20 20070e20     ... ...  ..  .. 
-20070e30:	20070e28 20070e28 20070e30 20070e30     (.. (.. 0.. 0.. 
-20070e40:	20070e38 20070e38 20070e40 20070e40     8.. 8.. @.. @.. 
-20070e50:	20070e48 20070e48 20070e50 20070e50     H.. H.. P.. P.. 
-20070e60:	20070e58 20070e58 20070e60 20070e60     X.. X.. `.. `.. 
-20070e70:	20070e68 20070e68 20070e70 20070e70     h.. h.. p.. p.. 
-20070e80:	20070e78 20070e78 20070e80 20070e80     x.. x.. ... ... 
+20070944:	00000043 00000000 00000000 00000000     C...............
+	...
+20070964:	00000043 00000000 00000000 00000000     C...............
+	...
+20070984:	00000043 00000000 00000000 00000000     C...............
+	...
+200709a4:	00000043 00000000 00000000 00000000     C...............
+	...
+200709c4:	00000043 00000000 00000000 00000000     C...............
+	...
+200709e4:	00000043 00000000 00000000 00000000     C...............
+	...
+20070a04:	000854c9 000848ad 00000000 0008647c     .T...H......|d..
+20070a14:	00086378 000862c0 000862c0 000862c0     xc...b...b...b..
+20070a24:	000862c0 000862c0 000862c0 000862c0     .b...b...b...b..
+20070a34:	000862c0 000862c0 ffffffff ffffffff     .b...b..........
+20070a44:	ffffffff 0000ffff 53410001 00494943     ..........ASCII.
+	...
+20070a6c:	53410000 00494943 00000000 00000000     ..ASCII.........
+	...
 
-20070e90 <__malloc_sbrk_base>:
-20070e90:	ffffffff                                ....
+20070a90 <__malloc_av_>:
+	...
+20070a98:	20070a90 20070a90 20070a98 20070a98     ... ... ... ... 
+20070aa8:	20070aa0 20070aa0 20070aa8 20070aa8     ... ... ... ... 
+20070ab8:	20070ab0 20070ab0 20070ab8 20070ab8     ... ... ... ... 
+20070ac8:	20070ac0 20070ac0 20070ac8 20070ac8     ... ... ... ... 
+20070ad8:	20070ad0 20070ad0 20070ad8 20070ad8     ... ... ... ... 
+20070ae8:	20070ae0 20070ae0 20070ae8 20070ae8     ... ... ... ... 
+20070af8:	20070af0 20070af0 20070af8 20070af8     ... ... ... ... 
+20070b08:	20070b00 20070b00 20070b08 20070b08     ... ... ... ... 
+20070b18:	20070b10 20070b10 20070b18 20070b18     ... ... ... ... 
+20070b28:	20070b20 20070b20 20070b28 20070b28      ..  .. (.. (.. 
+20070b38:	20070b30 20070b30 20070b38 20070b38     0.. 0.. 8.. 8.. 
+20070b48:	20070b40 20070b40 20070b48 20070b48     @.. @.. H.. H.. 
+20070b58:	20070b50 20070b50 20070b58 20070b58     P.. P.. X.. X.. 
+20070b68:	20070b60 20070b60 20070b68 20070b68     `.. `.. h.. h.. 
+20070b78:	20070b70 20070b70 20070b78 20070b78     p.. p.. x.. x.. 
+20070b88:	20070b80 20070b80 20070b88 20070b88     ... ... ... ... 
+20070b98:	20070b90 20070b90 20070b98 20070b98     ... ... ... ... 
+20070ba8:	20070ba0 20070ba0 20070ba8 20070ba8     ... ... ... ... 
+20070bb8:	20070bb0 20070bb0 20070bb8 20070bb8     ... ... ... ... 
+20070bc8:	20070bc0 20070bc0 20070bc8 20070bc8     ... ... ... ... 
+20070bd8:	20070bd0 20070bd0 20070bd8 20070bd8     ... ... ... ... 
+20070be8:	20070be0 20070be0 20070be8 20070be8     ... ... ... ... 
+20070bf8:	20070bf0 20070bf0 20070bf8 20070bf8     ... ... ... ... 
+20070c08:	20070c00 20070c00 20070c08 20070c08     ... ... ... ... 
+20070c18:	20070c10 20070c10 20070c18 20070c18     ... ... ... ... 
+20070c28:	20070c20 20070c20 20070c28 20070c28      ..  .. (.. (.. 
+20070c38:	20070c30 20070c30 20070c38 20070c38     0.. 0.. 8.. 8.. 
+20070c48:	20070c40 20070c40 20070c48 20070c48     @.. @.. H.. H.. 
+20070c58:	20070c50 20070c50 20070c58 20070c58     P.. P.. X.. X.. 
+20070c68:	20070c60 20070c60 20070c68 20070c68     `.. `.. h.. h.. 
+20070c78:	20070c70 20070c70 20070c78 20070c78     p.. p.. x.. x.. 
+20070c88:	20070c80 20070c80 20070c88 20070c88     ... ... ... ... 
+20070c98:	20070c90 20070c90 20070c98 20070c98     ... ... ... ... 
+20070ca8:	20070ca0 20070ca0 20070ca8 20070ca8     ... ... ... ... 
+20070cb8:	20070cb0 20070cb0 20070cb8 20070cb8     ... ... ... ... 
+20070cc8:	20070cc0 20070cc0 20070cc8 20070cc8     ... ... ... ... 
+20070cd8:	20070cd0 20070cd0 20070cd8 20070cd8     ... ... ... ... 
+20070ce8:	20070ce0 20070ce0 20070ce8 20070ce8     ... ... ... ... 
+20070cf8:	20070cf0 20070cf0 20070cf8 20070cf8     ... ... ... ... 
+20070d08:	20070d00 20070d00 20070d08 20070d08     ... ... ... ... 
+20070d18:	20070d10 20070d10 20070d18 20070d18     ... ... ... ... 
+20070d28:	20070d20 20070d20 20070d28 20070d28      ..  .. (.. (.. 
+20070d38:	20070d30 20070d30 20070d38 20070d38     0.. 0.. 8.. 8.. 
+20070d48:	20070d40 20070d40 20070d48 20070d48     @.. @.. H.. H.. 
+20070d58:	20070d50 20070d50 20070d58 20070d58     P.. P.. X.. X.. 
+20070d68:	20070d60 20070d60 20070d68 20070d68     `.. `.. h.. h.. 
+20070d78:	20070d70 20070d70 20070d78 20070d78     p.. p.. x.. x.. 
+20070d88:	20070d80 20070d80 20070d88 20070d88     ... ... ... ... 
+20070d98:	20070d90 20070d90 20070d98 20070d98     ... ... ... ... 
+20070da8:	20070da0 20070da0 20070da8 20070da8     ... ... ... ... 
+20070db8:	20070db0 20070db0 20070db8 20070db8     ... ... ... ... 
+20070dc8:	20070dc0 20070dc0 20070dc8 20070dc8     ... ... ... ... 
+20070dd8:	20070dd0 20070dd0 20070dd8 20070dd8     ... ... ... ... 
+20070de8:	20070de0 20070de0 20070de8 20070de8     ... ... ... ... 
+20070df8:	20070df0 20070df0 20070df8 20070df8     ... ... ... ... 
+20070e08:	20070e00 20070e00 20070e08 20070e08     ... ... ... ... 
+20070e18:	20070e10 20070e10 20070e18 20070e18     ... ... ... ... 
+20070e28:	20070e20 20070e20 20070e28 20070e28      ..  .. (.. (.. 
+20070e38:	20070e30 20070e30 20070e38 20070e38     0.. 0.. 8.. 8.. 
+20070e48:	20070e40 20070e40 20070e48 20070e48     @.. @.. H.. H.. 
+20070e58:	20070e50 20070e50 20070e58 20070e58     P.. P.. X.. X.. 
+20070e68:	20070e60 20070e60 20070e68 20070e68     `.. `.. h.. h.. 
+20070e78:	20070e70 20070e70 20070e78 20070e78     p.. p.. x.. x.. 
+20070e88:	20070e80 20070e80 20070e88 20070e88     ... ... ... ... 
 
-20070e94 <__malloc_trim_threshold>:
-20070e94:	00020000                                ....
+20070e98 <__malloc_sbrk_base>:
+20070e98:	ffffffff                                ....
+
+20070e9c <__malloc_trim_threshold>:
+20070e9c:	00020000                                ....

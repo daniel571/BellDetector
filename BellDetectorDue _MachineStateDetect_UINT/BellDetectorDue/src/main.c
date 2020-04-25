@@ -439,13 +439,13 @@ ISR(ADC_Handler)
 				}
 				else
 				{					
-					FilterState = 0;
+					FilterState = 6;
 					delay = 0;
 				}			
 			break;
 			
 			case 6:
-				if(delay<50000) //1 seconds to stable the filter
+				if(delay<25000) //0.5 seconds to stable the filter
 				{
 					delay++;
 				}
