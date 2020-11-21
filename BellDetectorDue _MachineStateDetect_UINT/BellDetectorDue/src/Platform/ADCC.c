@@ -22,9 +22,9 @@ void ADCC_Init()
 	ADC->ADC_RCR = ADC_NUM_CHANNELS;
 	ADC->ADC_RNPR =  (uint32_t)ADCC_GlobalRawData;
 	ADC->ADC_RNCR = ADC_NUM_CHANNELS;
-	adc_enable_channel(ADC,ADC_CHANNEL_0);
-	adc_enable_channel(ADC,ADC_CHANNEL_1);
-	adc_enable_channel(ADC,ADC_CHANNEL_2);
+	adc_enable_channel(ADC,ADC_CHANNEL_0); // Mic in
+	adc_enable_channel(ADC,ADC_CHANNEL_1); // Potentiometer 
+	adc_enable_channel(ADC,ADC_CHANNEL_2); // Filtered Mic
 	//adc_enable_interrupt(ADC,ADC_IER_EOC0);
 	adc_enable_interrupt(ADC,ADC_IER_ENDRX);
 	NVIC_EnableIRQ(ADC_IRQn);	

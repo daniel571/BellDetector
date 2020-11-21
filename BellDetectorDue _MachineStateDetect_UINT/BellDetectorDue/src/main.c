@@ -67,6 +67,8 @@ uint32_t FilterState = 6;
 int32_t FirstDetVal,SecondDetVal;
 uint32_t MaxEnergy;
 uint32_t MaxAllowedFirstVal = UINT32_MAX;
+float State0Rec;
+float State1Rec;
 
 #define MAX_CALIBRATION 6//11.0
 #define MAX_SIGNAL		9
@@ -300,8 +302,10 @@ int main (void)
 	
 		#if DEBUG_UART
 		Timer_Sleep(10);
-		sprintf(out_str,"%lu\r\n", ADCC_GlobalRawData[2]);//ADC->ADC_CDR[2]);
-		PrintLn(out_str);		
+	//	sprintf(out_str,"%f\r\n", ((float)ADCC_GlobalRawData[2]*3.3f)/((float)MAX_ADC-1.0f));//ADC->ADC_CDR[2]);
+		sprintf(out_str,"%lu %ld\r\n",FilterState,OutData );
+		PrintLn(out_str);	
+		//RF_SendBell(RF24_TEST);	
 		#endif
 		Timer_Sleep(100);
 	
@@ -335,7 +339,7 @@ ISR(ADC_Handler)
 		//FIFO2_Insert(&fifoDebug,SoundSum);
 		switch(FilterState)		
 		{
-			case 0:
+			case 0: // Listening to trigger
 				SecondDetVal = 0;
 				FirstDetVal = 0;
 				//MaxEnergy = 0;
@@ -351,11 +355,14 @@ ISR(ADC_Handler)
 					FirstDetVal = OutData;
 					//MaxEnergy = Energy;
 					FilterState = 1;
-					delay = 0;					
+					delay = 0;	
+					State1Rec = 3.3f;	
+					State0Rec = __ADC_GET_CH2_FLOAT();
 				}	
 			break;
 			
-			case 1:
+			case 1: // Detect Max pulse
+				State1Rec = min(__ADC_GET_CH2_FLOAT(),State1Rec);
 				if(OutData>MaxAllowedFirstVal)
 				{
 					FilterState = 5;
@@ -378,7 +385,8 @@ ISR(ADC_Handler)
 					MaxEnergy = Energy;*/
 			break;
 				
-			case 2:
+			case 2: // Delay state
+				State1Rec = min(__ADC_GET_CH2_FLOAT(),State1Rec);
 				if(OutData>FirstDetVal)
 				{
 					FilterState = 5;
@@ -388,14 +396,19 @@ ISR(ADC_Handler)
 				{
 					delay++;
 				}
-				else
+				else if( ((State0Rec - State1Rec) > 0.5f) || (State0Rec < 0.2f)) //Energy consideration
 				{
 					FilterState = 3;
 					delay = 0;
-				}				
+				}			
+				else // Minimum energy fault
+				{
+					FilterState = 0;
+					delay = 0;
+				}	
 			break;
 			
-			case 3:
+			case 3: // Detect second max pulse
 				if(delay<10000)
 				{
 					delay++;
@@ -417,7 +430,7 @@ ISR(ADC_Handler)
 				}				
 			break;
 			
-			case 4:
+			case 4: // Bell door detect
 				if(delay<250)
 				{
 					delay++;					
@@ -433,7 +446,7 @@ ISR(ADC_Handler)
 			break;
 			
 			case 5: // Noise state
-				if(delay<150000) //3 seconds hold off due noise
+				if(delay<50000) //1 seconds hold off due noise
 				{					
 					delay++;
 				}
@@ -444,7 +457,7 @@ ISR(ADC_Handler)
 				}			
 			break;
 			
-			case 6:
+			case 6: // Init state
 				if(delay<25000) //0.5 seconds to stable the filter
 				{
 					delay++;
